@@ -26,6 +26,7 @@ class Concordancer():
         """
         self.corpus = corpus
         self.corp_idx = {}
+        self.text_key = text_key
 
         # Detect corpus structure
         a_token = corpus[0][text_key][0][0]
@@ -59,7 +60,10 @@ class Concordancer():
 
         # Get concordance from corpus
         concordance_list = []
-        for doc_idx, sent_idx, tk_idx in self._search_keywords(keywords, tag, regex):
+        search_results = self._search_keywords(keywords, tag, regex)
+        if search_results is None: 
+            return search_results
+        for doc_idx, sent_idx, tk_idx in search_results:
             cc = self._kwic_single(doc_idx, sent_idx, tk_idx, tk_len=len(keywords), left=left, right=right)
             concordance_list.append(cc)
         
@@ -68,7 +72,7 @@ class Concordancer():
         
     def _kwic_single(self, doc_idx, sent_idx, tk_idx, tk_len=1, left=5, right=5):
         # Flatten doc sentences to a list of tokens
-        text, keyword_idx = flatten_doc_to_sent(self.corpus[doc_idx])
+        text, keyword_idx = flatten_doc_to_sent(self.get_corp_data(doc_idx))
 
         tk_start_idx = keyword_idx(sent_idx, tk_idx)
         tk_end_idx = tk_start_idx + tk_len
@@ -91,6 +95,8 @@ class Concordancer():
         best_search_loc = (0, None, math.inf)
         for i, keyword in enumerate(keywords):
             results = self._search_keyword(keyword, tag, regex)
+            if results is None: 
+                return None
             num_of_matched = len(results)
             if num_of_matched < best_search_loc[-1]:
                 best_search_loc = (i, results, num_of_matched)
@@ -111,12 +117,16 @@ class Concordancer():
         for idx in results:
             # Get possible matching keywords from corpus
             candidates = self.get_keywords(keyword_anchor, *idx)
-            if len(candidates) != len(keywords): continue
+            if len(candidates) != len(keywords): 
+                continue
             # Check every token in keywords
             matched_num = 0
             for w_k, w_c in zip(keywords, candidates):
+                ### TODO: CQL implement ##########
+                w_c = w_c[tag]
+                #######################
                 if regex:
-                    if not w_k.match(w_c): continue
+                    if not w_k.match(): continue
                 else:
                     if w_k != w_c: continue
                 matched_num += 1
@@ -143,10 +153,21 @@ class Concordancer():
 
 
     def get_keywords(self, search_anchor: dict, doc_idx, sent_idx, tk_idx):
-        start_idx = min(0, tk_idx - search_anchor['seed_idx'])
-        end_idx = max(start_idx + len(search_anchor['length']), len(self.corpus[doc_idx][sent_idx]))
+        
+        sent = self.get_corp_data(doc_idx, sent_idx)
+        start_idx = max(0, tk_idx - search_anchor['seed_idx'])
+        end_idx = min(start_idx + search_anchor['length'], len(sent))
+        
+        return sent[start_idx:end_idx]
 
-        return self.corpus[doc_idx][sent_idx][start_idx:end_idx]
+
+    def get_corp_data(self, doc_idx, sent_idx=None, tk_idx=None):
+        if sent_idx is None:
+            return self.corpus[doc_idx][self.text_key]
+        if tk_idx is None:
+            return self.corpus[doc_idx][self.text_key][sent_idx]
+        return self.corpus[doc_idx][self.text_key][sent_idx][tk_idx]
+
 
 
 ##################
