@@ -4,6 +4,7 @@ import math
 from typing import Union
 from copy import deepcopy
 from collections import Counter
+from kwic_print import KWIC
 
 
 class Concordancer():
@@ -96,6 +97,8 @@ class Concordancer():
             cc = self._kwic_single(doc_idx, sent_idx, tk_idx, tk_len=len(keywords), left=left, right=right)
             concordance_list.append(cc)
         
+        concordance_list = KWIC(concordance_list)
+        concordance_list.print()
         return concordance_list
 
         
@@ -291,5 +294,6 @@ if __name__ == "__main__":
             corpus.append(json.loads(l))
 
     C = Concordancer(corpus)
-    C.kwic("我.", regex=True)[:3]
+    concord_list = C.kwic("我.", left=2, right=2, regex=True)
+    #concord_list.data
 # %%
