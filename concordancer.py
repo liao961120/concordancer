@@ -109,9 +109,9 @@ class Concordancer():
             "keyword": text[tk_start_idx:tk_end_idx],
             "right": text[tk_end_idx:end_idx],
             "position": {
-                "doc": doc_idx,
-                "sent": sent_idx,
-                "token": tk_idx
+                "doc_idx": doc_idx,
+                "sent_idx": sent_idx,
+                "tk_idx": tk_idx
             }
         }
 
@@ -146,7 +146,7 @@ class Concordancer():
         matched_results = []
         for idx in results:
             # Get possible matching keywords from corpus
-            candidates = self.get_keywords(keyword_anchor, *idx)
+            candidates = self._get_keywords(keyword_anchor, *idx)
             if len(candidates) != len(keywords): 
                 continue
             # Check every token in keywords
@@ -182,7 +182,7 @@ class Concordancer():
             return sorted( x for x in set(matched_keyword_idx) )
 
 
-    def get_keywords(self, search_anchor: dict, doc_idx, sent_idx, tk_idx):
+    def _get_keywords(self, search_anchor: dict, doc_idx, sent_idx, tk_idx):
         
         sent = self.get_corp_data(doc_idx, sent_idx)
         start_idx = max(0, tk_idx - search_anchor['seed_idx'])
