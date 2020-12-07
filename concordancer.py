@@ -107,7 +107,12 @@ class Concordancer():
         return {
             "left": text[start_idx:tk_start_idx],
             "keyword": text[tk_start_idx:tk_end_idx],
-            "right": text[tk_end_idx:end_idx]
+            "right": text[tk_end_idx:end_idx],
+            "position": {
+                "doc": doc_idx,
+                "sent": sent_idx,
+                "token": tk_idx
+            }
         }
 
 
