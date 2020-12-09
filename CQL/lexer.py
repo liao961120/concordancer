@@ -1,10 +1,11 @@
 from tokens import Token, TokenType
 
 WHITESPACE = ' \t\n'
-ESCAPECHAR = '\\'
 NAME_CHARS = set('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-.')
 DIGITS = set('0123456789')
 QUANTIFIERS = set('?+*')
+with open("backslash.txt") as f: 
+    ESCAPECHAR = f.read().strip()
 
 class Lexer:
     def __init__(self, text):
@@ -37,10 +38,12 @@ class Lexer:
             elif (not self.char_in_attr_quotes) and self.current_char == '"':
                 self.char_in_attr_quotes = True
                 self.advance()
-            # ATTR_VALUE closing quote
-            elif self.char_in_attr_quotes and self.current_char == '"':
-                self.char_in_attr_quotes = False
-                self.advance()
+                if self.current_char == '"':
+                    raise Exception("Empty ATTR_VALUE")
+                else:
+                    yield self.generate_attr_value()
+                    self.advance()
+                    self.char_in_attr_quotes = False
             # ATTR_RELATION
             elif self.char_in_token_brackets and (not self.char_in_attr_quotes) and (self.current_char == '!' or self.current_char == '='):
                 yield self.generate_attr_relation()
@@ -48,8 +51,8 @@ class Lexer:
             elif self.char_in_token_brackets and (not self.char_in_attr_quotes) and self.current_char in NAME_CHARS:
                 yield self.generate_attr_name()
             # ATTR_VALUE
-            elif self.char_in_attr_quotes:
-                yield self.generate_attr_value()
+            #elif self.char_in_attr_quotes:
+            #    yield self.generate_attr_value()
             # Spaces between ATTR
             elif self.char_in_token_brackets and (not self.char_in_attr_quotes) and self.current_char in WHITESPACE:
                 self.advance()
@@ -109,21 +112,26 @@ class Lexer:
 
 
     def generate_attr_value(self):
-        attr_str = self.current_char
-        self.advance()
+        attr_str = ''
 
-        while self.current_char != None and self.current_char != '"':
+        #while self.current_char != None and self.current_char != '"':
+        while self.current_char != None:
             if self.current_char == ESCAPECHAR:
                 self.advance()
                 if self.current_char is None:
                     raise Exception(f"Illegal character in generate_attr_value {self.current_char}")
-                # Show regex backslash escape
-                elif self.current_char != '"':
-                    attr_str += ESCAPECHAR
                 # Remove backslash escape for literal double quote
+                elif self.current_char == '"':
+                    attr_str += self.current_char
+                # Show regex backslash escape
                 else:
-                    pass
-                
+                    attr_str += ESCAPECHAR + self.current_char
+                self.advance()
+                continue
+            
+            if self.current_char == '"':
+                break 
+            
             attr_str += self.current_char
             self.advance()
         

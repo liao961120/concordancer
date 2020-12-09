@@ -1,4 +1,5 @@
 from enum import Enum
+from dataclasses import dataclass
 
 class TokenType(Enum):
     ATTR_NAME           = 0
@@ -11,11 +12,10 @@ class TokenType(Enum):
     EMPTY_TOKEN         = 7
     DEFAULT_TOKEN       = 8
 
-
+@dataclass
 class Token:
-    def __init__(self, type_:TokenType, value:any=None):
-        self.type = type_
-        self.value = value
+    type: TokenType
+    value: any = None
     
     def __repr__(self):
         return self.type.name + (f":{self.value}" if self.value is not None else "")
