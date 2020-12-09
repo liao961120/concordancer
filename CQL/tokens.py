@@ -1,13 +1,15 @@
 from enum import Enum
 
 class TokenType(Enum):
-    ATTR_NAME        = 0
-    ATTR_VALUE       = 1
-    ATTR_RELATION    = 2
-    ATTR_AND         = 3
-    TOKEN_QUANTIFIER = 4
-    TOKEN_LABEL      = 5
-    SEP              = 6
+    ATTR_NAME           = 0
+    ATTR_VALUE          = 1
+    ATTR_RELATION       = 2
+    ATTR_AND            = 3
+    TOKEN_QUANTIFIER    = 4
+    TOKEN_LABEL         = 5
+    SEP                 = 6
+    EMPTY_TOKEN         = 7
+    DEFAULT_TOKEN       = 8
 
 
 class Token:
