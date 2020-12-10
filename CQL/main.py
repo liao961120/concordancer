@@ -1,10 +1,15 @@
 from lexer import Lexer
+from parser_ import Parser
 
 while True:
-    try:
+    #try:
         text = input('CQL > ')
         lexer = Lexer(text)
         tokens = list(lexer.generate_tokens())
         print(tokens)
-    except Exception as e:
-        print(e)
+        print()
+        parser = Parser(tokens)
+        tree = parser.parse()
+        print(tree)
+    #except Exception as e:
+    #    print(e)
