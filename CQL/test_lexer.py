@@ -18,7 +18,7 @@ class TestLexer(unittest.TestCase):
     def test_empty_token(self):
         tokens = list(Lexer('[]').generate_tokens())
         self.assertEqual(tokens, [
-            Token(TokenType.EMPTY_TOKEN)
+            Token(TokenType.EMPTY_TOKEN, "EMPTY_TOKEN")
         ])
 
     def test_default_token(self):
@@ -62,7 +62,7 @@ class TestLexer(unittest.TestCase):
         tokens = list(Lexer('abc:[] abc:"我們"').generate_tokens())
         self.assertEqual(tokens, [
             Token(TokenType.TOKEN_LABEL, 'abc'),
-            Token(TokenType.EMPTY_TOKEN),
+            Token(TokenType.EMPTY_TOKEN, "EMPTY_TOKEN"),
             Token(TokenType.TOKEN_LABEL, 'abc'),
             Token(TokenType.DEFAULT_TOKEN, '我們'),
         ])
@@ -70,15 +70,15 @@ class TestLexer(unittest.TestCase):
     def test_token_quatifier(self):
         tokens = list(Lexer('[]{1,2} []{2} []? []* []+').generate_tokens())
         self.assertEqual(tokens, [
-            Token(TokenType.EMPTY_TOKEN),
+            Token(TokenType.EMPTY_TOKEN, "EMPTY_TOKEN"),
             Token(TokenType.TOKEN_QUANTIFIER, (1, 2)),
-            Token(TokenType.EMPTY_TOKEN),
+            Token(TokenType.EMPTY_TOKEN, "EMPTY_TOKEN"),
             Token(TokenType.TOKEN_QUANTIFIER, (2, 2)),
-            Token(TokenType.EMPTY_TOKEN),
+            Token(TokenType.EMPTY_TOKEN, "EMPTY_TOKEN"),
             Token(TokenType.TOKEN_QUANTIFIER, (0, 1)),
-            Token(TokenType.EMPTY_TOKEN),
+            Token(TokenType.EMPTY_TOKEN, "EMPTY_TOKEN"),
             Token(TokenType.TOKEN_QUANTIFIER, (0, 'inf')),
-            Token(TokenType.EMPTY_TOKEN),
+            Token(TokenType.EMPTY_TOKEN, "EMPTY_TOKEN"),
             Token(TokenType.TOKEN_QUANTIFIER, (1, 'inf')),
         ])
     
@@ -101,7 +101,7 @@ class TestLexer(unittest.TestCase):
         tokens = list(Lexer('([] "a")+').generate_tokens())
         self.assertEqual(tokens, [
             Token(TokenType.LPAREN),
-            Token(TokenType.EMPTY_TOKEN),
+            Token(TokenType.EMPTY_TOKEN, "EMPTY_TOKEN"),
             Token(TokenType.DEFAULT_TOKEN, "a"),
             Token(TokenType.RPAREN),
             Token(TokenType.TOKEN_QUANTIFIER, (1, 'inf')),

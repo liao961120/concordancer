@@ -29,7 +29,7 @@ class Lexer:
                 self.char_in_token_brackets = True
                 self.advance()
                 if self.current_char == ']':
-                    yield Token(TokenType.EMPTY_TOKEN)
+                    yield Token(TokenType.EMPTY_TOKEN, "EMPTY_TOKEN")
             # TOKEN closing quote
             elif self.char_in_token_brackets and self.current_char == ']':
                 self.char_in_token_brackets = False
