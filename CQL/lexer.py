@@ -60,9 +60,9 @@ class Lexer:
             elif self.char_in_token_brackets and (not self.char_in_attr_quotes) and self.current_char == '&':
                 yield Token(TokenType.ATTR_AND)
                 self.advance()
-            # SEP
-            elif (not self.char_in_token_brackets) and self.current_char in WHITESPACE:
-                yield self.generate_separator()
+            # Whitespaces between tokens
+            elif (not self.char_in_token_brackets) and (not self.char_in_attr_quotes) and self.current_char in WHITESPACE:
+                self.advance()
             # TOKEN_LABEL
             elif (not self.char_in_token_brackets) and (not self.char_in_attr_quotes) and (not self.char_in_quantifiers) and self.current_char in NAME_CHARS:
                 yield self.generate_token_label()
@@ -90,14 +90,15 @@ class Lexer:
                 else:
                     raise Exception(f"Invalid character {self.current_char}")
                 self.advance()
+            # GROUP expressions
+            elif (not self.char_in_token_brackets) and (not self.char_in_attr_quotes) and self.current_char == '(':
+                yield Token(TokenType.LPAREN)
+                self.advance()
+            elif (not self.char_in_token_brackets) and (not self.char_in_attr_quotes) and self.current_char == ')':
+                yield Token(TokenType.RPAREN)
+                self.advance()
             else:
                 raise Exception(f"Illegal character '{self.current_char}'")
-
-
-    def generate_separator(self):
-        while self.current_char is not None and self.current_char in WHITESPACE:
-            self.advance()
-        return Token(TokenType.SEP)
 
 
     def generate_attr_name(self):

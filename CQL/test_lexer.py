@@ -46,7 +46,6 @@ class TestLexer(unittest.TestCase):
             Token(TokenType.ATTR_NAME, "word"),
             Token(TokenType.ATTR_RELATION, "is"),
             Token(TokenType.ATTR_VALUE, "\t"),
-            Token(TokenType.SEP),
             Token(TokenType.ATTR_NAME, "word"),
             Token(TokenType.ATTR_RELATION, "is_not"),
             Token(TokenType.ATTR_VALUE, '"'),
@@ -64,7 +63,6 @@ class TestLexer(unittest.TestCase):
         self.assertEqual(tokens, [
             Token(TokenType.TOKEN_LABEL, 'abc'),
             Token(TokenType.EMPTY_TOKEN),
-            Token(TokenType.SEP),
             Token(TokenType.TOKEN_LABEL, 'abc'),
             Token(TokenType.DEFAULT_TOKEN, '我們'),
         ])
@@ -74,16 +72,12 @@ class TestLexer(unittest.TestCase):
         self.assertEqual(tokens, [
             Token(TokenType.EMPTY_TOKEN),
             Token(TokenType.TOKEN_QUANTIFIER, (1, 2)),
-            Token(TokenType.SEP),
             Token(TokenType.EMPTY_TOKEN),
             Token(TokenType.TOKEN_QUANTIFIER, (2, 2)),
-            Token(TokenType.SEP),
             Token(TokenType.EMPTY_TOKEN),
             Token(TokenType.TOKEN_QUANTIFIER, (0, 1)),
-            Token(TokenType.SEP),
             Token(TokenType.EMPTY_TOKEN),
             Token(TokenType.TOKEN_QUANTIFIER, (0, 'inf')),
-            Token(TokenType.SEP),
             Token(TokenType.EMPTY_TOKEN),
             Token(TokenType.TOKEN_QUANTIFIER, (1, 'inf')),
         ])
@@ -93,20 +87,25 @@ class TestLexer(unittest.TestCase):
         self.assertEqual(tokens, [
             Token(TokenType.DEFAULT_TOKEN, "我們"),
             Token(TokenType.TOKEN_QUANTIFIER, (1, 2)),
-            Token(TokenType.SEP),
             Token(TokenType.DEFAULT_TOKEN, "我們"),
             Token(TokenType.TOKEN_QUANTIFIER, (2, 2)),
-            Token(TokenType.SEP),
             Token(TokenType.DEFAULT_TOKEN, "我們"),
             Token(TokenType.TOKEN_QUANTIFIER, (0, 1)),
-            Token(TokenType.SEP),
             Token(TokenType.DEFAULT_TOKEN, "我們"),
             Token(TokenType.TOKEN_QUANTIFIER, (0, 'inf')),
-            Token(TokenType.SEP),
             Token(TokenType.DEFAULT_TOKEN, "我們"),
             Token(TokenType.TOKEN_QUANTIFIER, (1, 'inf')),
         ])
-    
+
+    def test_group(self):
+        tokens = list(Lexer('([] "a")+').generate_tokens())
+        self.assertEqual(tokens, [
+            Token(TokenType.LPAREN),
+            Token(TokenType.EMPTY_TOKEN),
+            Token(TokenType.DEFAULT_TOKEN, "a"),
+            Token(TokenType.RPAREN),
+            Token(TokenType.TOKEN_QUANTIFIER, (1, 'inf')),
+        ])    
 
     def test_all(self):
         tokens = list(Lexer('[word="把" & pos="P"] [pos!="N[abcd].*|COMMACATEGORY|PERIODCATEGORY"]* obj:[pos="N[abcd].*"] v:[pos="V.*"]').generate_tokens())
@@ -118,17 +117,14 @@ class TestLexer(unittest.TestCase):
             Token(TokenType.ATTR_NAME, "pos"),
             Token(TokenType.ATTR_RELATION, 'is'),
             Token(TokenType.ATTR_VALUE, 'P'),
-            Token(TokenType.SEP),
             Token(TokenType.ATTR_NAME, "pos"),
             Token(TokenType.ATTR_RELATION, 'is_not'),
             Token(TokenType.ATTR_VALUE, 'N[abcd].*|COMMACATEGORY|PERIODCATEGORY'),
             Token(TokenType.TOKEN_QUANTIFIER, (0, 'inf')),
-            Token(TokenType.SEP),
             Token(TokenType.TOKEN_LABEL, 'obj'),
             Token(TokenType.ATTR_NAME, "pos"),
             Token(TokenType.ATTR_RELATION, 'is'),
             Token(TokenType.ATTR_VALUE, 'N[abcd].*'),
-            Token(TokenType.SEP),
             Token(TokenType.TOKEN_LABEL, 'v'),
             Token(TokenType.ATTR_NAME, "pos"),
             Token(TokenType.ATTR_RELATION, 'is'),

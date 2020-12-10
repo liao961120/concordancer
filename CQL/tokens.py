@@ -8,9 +8,10 @@ class TokenType(Enum):
     ATTR_AND            = 3
     TOKEN_QUANTIFIER    = 4
     TOKEN_LABEL         = 5
-    SEP                 = 6
-    EMPTY_TOKEN         = 7
-    DEFAULT_TOKEN       = 8
+    EMPTY_TOKEN         = 6
+    DEFAULT_TOKEN       = 7
+    LPAREN              = 8
+    RPAREN              = 9
 
 @dataclass
 class Token:
