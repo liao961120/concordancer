@@ -15,9 +15,13 @@ class AttrValueNode:
         return f"{self.value}"
 
 @dataclass
-class EmptyTokenNode:
+class AssignAttrNode:
+    node_a: any
+    operator: any
+    node_b: any
+
     def __repr__(self):
-        return "EMPTY_TOKEN"
+        return f"({self.node_a} {self.operator} {self.node_b})"
 
 @dataclass
 class DefaultTokenNode:
@@ -27,13 +31,9 @@ class DefaultTokenNode:
         return f"(DFTattr is {self.value})"
 
 @dataclass
-class AssignAttrNode:
-    node_a: any
-    operator: any
-    node_b: any
-
+class EmptyTokenNode:
     def __repr__(self):
-        return f"({self.node_a} {self.operator} {self.node_b})"
+        return "EMPTY_TOKEN"
 
 @dataclass
 class ConjoinAttrNode:
