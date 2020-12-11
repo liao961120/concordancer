@@ -14,28 +14,25 @@ class Parser:
             self.current_token = next(self.tokens)
         except StopIteration:
             self.current_token = None
-    
+
     def parse(self):
         if self.current_token is None:
             return None
-        
+
         result = self.list_wordGroups()
 
         if self.current_token != None:
             self.raise_error()
-        
+
         return result
-    
+
     def list_wordGroups(self):
         result = []
         while self.current_token != None:
-            groups = self.wordGroup()
-            result.append(groups)
-            self.advance()
-        
-        print(f"list_wordGroups: {result}")
+            group = self.wordGroup()
+            result.append(group)
+
         return result
-    
 
     def wordGroup(self):
         token = self.current_token
@@ -52,36 +49,42 @@ class Parser:
         if self.current_token.type == TokenType.LPAREN:
             self.advance()
             while self.current_token != None and self.current_token.type in {TokenType.DEFAULT_TOKEN, TokenType.EMPTY_TOKEN, TokenType.TOKEN_LABEL, TokenType.ATTR_NAME, TokenType.LPAREN}:
+                #print(self.current_token)
                 if self.current_token.type == TokenType.LPAREN:
                     result = self.wordGroup()
                 else:
                     result = self.word()
+                    #print(f"  {result}")
+                    #print(f"  {self.current_token}")
                 word_group.append(result)
             
             if self.current_token.type != TokenType.RPAREN:
                 self.raise_error()
-            
-            # Check trailing quantifier
             self.advance()
-            if self.current_token.type == TokenType.TOKEN_QUANTIFIER:
+
+            # Check trailing quantifier
+            if self.current_token != None and self.current_token.type == TokenType.TOKEN_QUANTIFIER:
                 quant = self.current_token.value
+                self.advance()
 
             # Add label and quantifiers to group
             if quant != None:
-                word_group = QuantifyNode(word_group, quant) 
-            if label != None:
-                word_group = LabelNode(word_group, label)
-            
-            return word_group
-            
-        elif self.current_token.type in {TokenType.DEFAULT_TOKEN, TokenType.EMPTY_TOKEN, TokenType.ATTR_NAME}:
-            word_group = self.word()
+                word_group = QuantifyNode(word_group, quant)
             if label != None:
                 word_group = LabelNode(word_group, label)
 
-            print(f"wordGroup: {word_group}")
             return word_group
-        
+
+        # Single word
+        elif self.current_token.type in {TokenType.DEFAULT_TOKEN, TokenType.EMPTY_TOKEN, TokenType.ATTR_NAME}:
+            #print(self.current_token)
+            word_group = self.word()
+            #print(word_group)
+            if label != None:
+                word_group = LabelNode(word_group, label)
+
+            return word_group
+
 
     def word(self):
         quant = None
@@ -90,16 +93,17 @@ class Parser:
             if self.current_token.type == TokenType.DEFAULT_TOKEN:
                 word = DefaultTokenNode(self.current_token.value)
             else:
-                word = EmptyTokenNode(self.current_token.value)
-            
+                word = EmptyTokenNode()
+
+            # Check trailing quantifier
             self.advance()
-            if self.current_token.type == TokenType.TOKEN_QUANTIFIER:
+            if self.current_token != None and self.current_token.type == TokenType.TOKEN_QUANTIFIER:
                 quant = self.current_token.value
-            
+                self.advance()
+
             if quant != None:
-                word = QuantifyNode(word, quant) 
-            
-            print(f"word: {word}")
+                word = QuantifyNode(word, quant)
+
             return word
 
         # Construct word from attributes
@@ -108,19 +112,16 @@ class Parser:
         while self.current_token != None and self.current_token.type == TokenType.ATTR_AND:
             self.advance()
             word = ConjoinAttrNode(word, self.word_attrpair())
-        
+
         # Check quantifier
-        print(f"TOKEN: {self.current_token}")
-        if self.current_token.type == TokenType.TOKEN_QUANTIFIER:
+        if self.current_token != None and self.current_token.type == TokenType.TOKEN_QUANTIFIER:
             quant = self.current_token.value
-
+            self.advance()
         if quant != None:
-            word = QuantifyNode(word, quant) 
+            word = QuantifyNode(word, quant)
 
-        
-        print(f"word: {word}")
         return word
-    
+
 
     def word_attrpair(self):
         token = self.current_token
@@ -131,10 +132,11 @@ class Parser:
                 operator = self.current_token.value
                 self.advance()
                 if self.current_token.type == TokenType.ATTR_VALUE:
-                    return AssignAttrNode(
-                        AttrNameNode(token.value), 
-                        operator, 
+                    result = AssignAttrNode(
+                        AttrNameNode(token.value),
+                        operator,
                         AttrValueNode(self.current_token.value))
+                    self.advance()
+                    return result
 
-        
         self.raise_error()

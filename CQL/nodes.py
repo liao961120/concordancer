@@ -16,8 +16,6 @@ class AttrValueNode:
 
 @dataclass
 class EmptyTokenNode:
-    value: None
-
     def __repr__(self):
         return "EMPTY_TOKEN"
 
@@ -51,7 +49,7 @@ class QuantifyNode:
     quantifier: any
 
     def __repr__(self):
-        return f"({self.node_a}_{self.quantifier})"
+        return f"{self.node_a}" + "{" + f"{','.join(str(x) for x in self.quantifier)}" "}"
 
 @dataclass
 class LabelNode:
@@ -59,4 +57,4 @@ class LabelNode:
     label: any
 
     def __repr__(self):
-        return f"({self.label}:{self.node_a})"
+        return f"{self.label}:{self.node_a}"
