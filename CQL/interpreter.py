@@ -61,16 +61,6 @@ class Interpreter:
         return QueryTerm(qt)
     
     def visit_QuantifyNode(self, node):
-        """[summary]
-
-        Parameters
-        ----------
-        node : [type]
-            [description]
-
-        Returns
-        -------
-        """
         quant_num = node.quantifier
 
         if isinstance(node.node_a, list):
