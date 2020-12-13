@@ -18,16 +18,16 @@ class TestInterpreter(unittest.TestCase):
         ans = [
             [
                 {
-                    'match': {DFT_ATTR: "a"},
+                    'match': {DFT_ATTR: ["a"]},
                     'not_match': {}
                 }, 
                 {
-                    'match': {'word': "b"},
+                    'match': {'word': ["b"]},
                     'not_match': {}
                 }, 
                 {
-                    'match': {'word': "c"},
-                    'not_match': {'word': "d"}
+                    'match': {'word': ["c"]},
+                    'not_match': {'pos': ["d"]}
                 }, 
             ]
         ]
@@ -40,16 +40,16 @@ class TestInterpreter(unittest.TestCase):
         ans = [
             [
                 {
-                    'match': {DFT_ATTR: "a"},
+                    'match': {DFT_ATTR: ["a"]},
                     'not_match': {}
                 }, 
                 {
-                    'match': {'word': "b"},
+                    'match': {'word': ["b"]},
                     'not_match': {}
                 }, 
                 {
-                    'match': {'word': "c"},
-                    'not_match': {'word': "d"}
+                    'match': {'word': ["c"]},
+                    'not_match': {'pos': ["d"]}
                 }, 
             ]
         ]
@@ -62,17 +62,17 @@ class TestInterpreter(unittest.TestCase):
         ans = [
             [
                 {
-                    'match': {DFT_ATTR: "a"},
+                    'match': {DFT_ATTR: ["a"]},
                     'not_match': {}
                 }, 
                 {
-                    'match': {'word': "b"},
+                    'match': {'word': ["b"]},
                     'not_match': {},
                     '__label__': ['lab']
                 }, 
                 {
-                    'match': {'word': "c"},
-                    'not_match': {'word': "d"},
+                    'match': {'word': ["c"]},
+                    'not_match': {'pos': ["d"]},
                     '__label__': ['lab', 'lab2']
                 }, 
             ]
@@ -101,6 +101,10 @@ def generate_queries(cql: str):
 
 
 #%%
+cql = '''
+"a" [word="b"] [word="c" & pos!="d"]
+'''
+generate_queries(cql)
 
 
 #%%

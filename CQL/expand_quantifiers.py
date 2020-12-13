@@ -33,5 +33,4 @@ def expand_quantifiers(tokens: list, max_quant: int=15):
             results.append(new_tokens)
             records.add(record)
 
-    print(records)
     return results
