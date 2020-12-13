@@ -48,9 +48,10 @@ class Parser:
         # Parentheses as group
         if self.current_token.type == TokenType.LPAREN:
             self.advance()
-            while self.current_token != None and self.current_token.type in {TokenType.DEFAULT_TOKEN, TokenType.EMPTY_TOKEN, TokenType.TOKEN_LABEL, TokenType.ATTR_NAME, TokenType.LPAREN}:
-                #print(self.current_token)
+            while self.current_token != None and self.current_token.type in {TokenType.DEFAULT_TOKEN, TokenType.EMPTY_TOKEN, TokenType.TOKEN_LABEL, TokenType.ATTR_NAME, TokenType.LPAREN, TokenType.TOKEN_LABEL}:
                 if self.current_token.type == TokenType.LPAREN:
+                    result = self.wordGroup()
+                elif self.current_token.type == TokenType.TOKEN_LABEL:
                     result = self.wordGroup()
                 else:
                     result = self.word()
