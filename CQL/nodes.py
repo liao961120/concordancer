@@ -46,10 +46,10 @@ class ConjoinAttrNode:
 @dataclass
 class QuantifyNode:
     node_a: any
-    quantifier: any
+    quantifier: int
 
     def __repr__(self):
-        return f"{self.node_a}" + "{" + f"{','.join(str(x) for x in self.quantifier)}" "}"
+        return f"{self.node_a}" + "{" + f"{self.quantifier}" "}"
 
 @dataclass
 class LabelNode:
