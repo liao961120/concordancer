@@ -1,7 +1,5 @@
 from nodes import *
 from values import QueryTerm
-from itertools import chain
-
 
 class Interpreter:
     def __init__(self, default_attrname: str):

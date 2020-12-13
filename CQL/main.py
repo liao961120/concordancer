@@ -1,7 +1,7 @@
 from lexer import Lexer
-from expand_quantifiers import expand_quantifiers
 from parser_ import Parser
-from interpreter import Interpreter, flatten_list
+from interpreter import Interpreter
+from expand_quantifiers import expand_quantifiers
 
 MAX_QUANT = 15
 DEFAULT_ATTR_NAME = 'w'
