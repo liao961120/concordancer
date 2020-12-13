@@ -6,7 +6,6 @@ from interpreter import Interpreter
 from expand_quantifiers import expand_quantifiers
 from deepdiff import DeepDiff
 
-
 MAX_QUANT = 15
 DFT_ATTR = 'w'
 
@@ -81,7 +80,88 @@ class TestInterpreter(unittest.TestCase):
         self.assertEqual(diff, {})
 
 
+    def test_quantifier(self):
+        values = generate_queries('"a"{2} [word="hi" & pos!="v.*" & word="j"]{1}')
+        ans = [
+            [
+                {
+                    'match': {DFT_ATTR: ["a"]},
+                    'not_match': {}
+                }, 
+                {
+                    'match': {DFT_ATTR: ["a"]},
+                    'not_match': {}
+                },
+                {
+                    'match': {'word': ["hi", "j"]},
+                    'not_match': {'pos': ["v.*"]}
+                },
+            ]
+        ]
+        diff = DeepDiff(values, ans, ignore_order=True)
+        self.assertEqual(diff, {})
 
+
+    def test_quantifiers(self):
+        values = generate_queries('[]{0,2}')
+        ans = [
+            [{}],
+            [{}, {}]
+        ]
+        diff = DeepDiff(values, ans, ignore_order=True)
+        self.assertEqual(diff, {})
+
+    def test_quantifiers(self):
+        values = generate_queries('"a"{0,1} "b"{1,2}')
+        ans = [
+            [
+                {
+                    'match': {DFT_ATTR: ["b"]},
+                    'not_match': {}
+                }
+            ],
+            [
+                {
+                    'match': {DFT_ATTR: ["b"]},
+                    'not_match': {}
+                },
+                {
+                    'match': {DFT_ATTR: ["b"]},
+                    'not_match': {}
+                }
+            ],
+            [
+                {
+                    'match': {DFT_ATTR: ["a"]},
+                    'not_match': {}
+                },
+                {
+                    'match': {DFT_ATTR: ["b"]},
+                    'not_match': {}
+                }
+            ],
+            [
+                {
+                    'match': {DFT_ATTR: ["a"]},
+                    'not_match': {}
+                },
+                {
+                    'match': {DFT_ATTR: ["b"]},
+                    'not_match': {}
+                },
+                {
+                    'match': {DFT_ATTR: ["b"]},
+                    'not_match': {}
+                }
+            ],
+        ]
+        diff = DeepDiff(values, ans, ignore_order=True)
+        self.assertEqual(diff, {})
+
+
+###################################
+######   HELPER FUNCTIONS   #######
+###################################
 def generate_queries(cql: str):
     
     tokens = list(Lexer(cql).generate_tokens())
@@ -101,10 +181,13 @@ def generate_queries(cql: str):
 
 
 #%%
-cql = '''
-"a" [word="b"] [word="c" & pos!="d"]
-'''
-generate_queries(cql)
+##############################
+######   MANUAL TEST   #######
+##############################
+# cql = '''
+# []{0,2}
+# '''
+# generate_queries(cql)
 
 
 #%%
