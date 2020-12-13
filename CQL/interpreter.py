@@ -1,20 +1,20 @@
 from nodes import *
 from values import QueryTerm
+from itertools import chain
 
-# def print(x=None):
-#     pp.pprint(x)
 
 class Interpreter:
-    def __init__(self, default_attrname: str, quantifier_max: int=10):
+    def __init__(self, default_attrname: str):
         self.default_attrname = default_attrname
-        self.quantifier_max = quantifier_max
     
     def visit(self, node):
         # AttrNameNode => visit_AttrNameNode
         method_name = f"visit_{type(node).__name__}"
         method = getattr(self, method_name)
-        return method(node)
-        # return flatten_2dim(method(node))
+        result = method(node)
+        if isinstance(result, list):
+            result = flatten_list(result)
+        return result
     
     def visit_list(self, node):
         out = []
@@ -71,7 +71,7 @@ class Interpreter:
         Returns
         -------
         """
-        min_, max_ = node.quantifier
+        quant_num = node.quantifier
 
         if isinstance(node.node_a, list):
             queryTerms = []
@@ -84,16 +84,13 @@ class Interpreter:
         else:
             visited = self.visit(node.node_a)
             if isinstance(visited, list):
-                queryTerms = [ visited ]
+                queryTerms = visited
             else:
                 queryTerms = [ visited.value ]
-        
-        # Enemerate all possible kinds of queries
-        lst_of_queryTerms = []
-        for i in range(min_, max_ + 1):
-            lst_of_queryTerms.append( queryTerms * i )
-        
-        return lst_of_queryTerms
+
+        # Expand quantifier
+        queryTerms =  queryTerms * quant_num        
+        return queryTerms
 
 
     def visit_LabelNode(self, node):
@@ -109,64 +106,27 @@ class Interpreter:
         else:
             qts = self.visit(node.node_a)
             if not isinstance(qts, list):
-                qts = qts.value
+                qts = [ qts.value ]
+        
+        # Flatten data
+        qts = flatten_list(qts)
 
         return add_label(qts, label)
 
-## ToDo: flatten final (QT tagged with labels, if given) output data     
 
-
-#%%
-def flatten_nested_queries_to_2dim(lst: list):
-    """[summary]
-
-    Parameters
-    ----------
-    lst : list
-        [description]
-
-    Miniumum nested structure:
-    []
-
-    [{}, {}]
-    
-    [
-        [{}, {}, {}],
-        [{}, {}, {}]
-    ]
-    
-    [
-        [
-            [{}, {}, {}],
-            [{}, {}, {}]
-        ]
-    ]
-    """
-    # Check structure
-    struct = ''
-    lev1_nested, lev2_nested  = 0, 0
-    for elem_l1 in lst:
-        if isinstance(elem_l1, list):
-            lev1_nested += 1
-        for elem_l2 in elem_l1:
-            if isinstance(elem_l2, list):
-                lev2_nested += 1
-    if lev1_nested == len(lst):
-        nested_level = 2
-    if lev2_nested == ''
-        pass
-
-    # Deal with 3 or more nested structure
-
-
-def unnest_one_level(lst: list):
-    return lst[0]
-
-def is_nested(lst: list):
+################################
+####### Helper functions #######
+################################
+def flatten_list(lst: list):
+    out = []
     for elem in lst:
-        if isinstance(elem, list):
-            return True
-    return False
+        if not isinstance(elem, list):
+            out.append(elem)
+        else:
+            flatten = flatten_list(elem)
+            out += flatten
+    
+    return out
 
 def conjoin_dict(dict1, dict2):
     qt = {
@@ -193,24 +153,10 @@ def conjoin_dict(dict1, dict2):
 def add_label(qts, label):
     if isinstance(qts, dict):
         return add_label_qt(qts, label)
-    
-    # Recursively add label to nested query terms
     if isinstance(qts, list):
-        out = []
-        for elem in qts:
-            if isinstance(elem, dict):
-                qt = add_label_qt(elem, label)
-            elif isinstance(elem, list):
-                qt = add_label(elem, label)
-            else:
-                print('=====Error in add_label()========')
-                print(elem)
-                print('=================================')
-                raise Exception("None qt found")
-            
-            out.append(qt)
-    
-        return out
+        return [ add_label_qt(qt, label) for qt in qts ]
+    raise Exception(f"Unexpected data struct: {qts}")
+
 
 def add_label_qt(qt, label):
     if '__label__' not in qt:
