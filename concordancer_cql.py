@@ -4,38 +4,45 @@ import math
 from typing import Union
 from copy import deepcopy
 from collections import Counter
-from kwic_print import KWIC
 from utils import queryMatchToken, match_mode
 from indexedCorpus import IndexedCorpus
+import cqls
 
 
 class Concordancer(IndexedCorpus):
 
-    def kwic(self, keywords: Union[str, list], default_tag="word", left=5, right=5, regex=False):
+    cql_default_attr = "word"
+    cql_max_quantity = 6
 
-        if default_tag not in self.corp_idx:
-            print(f"`{default_tag}` not an attribute in the corpus")
-            print(f"  available attributes: {', '.join(self.corp_idx.keys())}")
-            return []
+    def cql_search(self, cql: str, left=5, right=5):
+        queries = cqls.parse(cql, default_attr=self.cql_default_attr,max_quant=self.cql_max_quantity)
+
+        results = []
+        for query in queries:
+            results += self.kwic(keywords=query, left=left, right=right)
         
-        if isinstance(keywords, str): 
-            keywords = [ {f"{default_tag}":keywords} ]
+        return results
 
+
+    def set_cql_parameters(self, default_attr: str, max_quant: int):
+        self.cql_default_attr = default_attr
+        self.cql_max_quantity = max_quant
+
+
+    def kwic(self, keywords: list, left=5, right=5):
         # Get concordance from corpus
         concordance_list = []
-        search_results = self._search_keywords(keywords, default_tag, regex)
+        search_results = self._search_keywords(keywords)
         if search_results is None: 
             return search_results
         for doc_idx, sent_idx, tk_idx in search_results:
-            cc = self._kwic_single(doc_idx, sent_idx, tk_idx, tk_len=len(keywords), left=left, right=right)
+            cc = self._kwic_single(doc_idx, sent_idx, tk_idx, tk_len=len(keywords), left=left, right=right, keywords=keywords)
             concordance_list.append(cc)
         
-        concordance_list = KWIC(concordance_list)
-        concordance_list.print()
         return concordance_list
 
         
-    def _kwic_single(self, doc_idx, sent_idx, tk_idx, tk_len=1, left=5, right=5):
+    def _kwic_single(self, doc_idx, sent_idx, tk_idx, tk_len=1, left=5, right=5, keywords:list=None):
         # Flatten doc sentences to a list of tokens
         text, keyword_idx = flatten_doc_to_sent(self.get_corp_data(doc_idx))
 
@@ -43,6 +50,16 @@ class Concordancer(IndexedCorpus):
         tk_end_idx = tk_start_idx + tk_len
         start_idx = max(tk_start_idx - left, 0)
         end_idx = min(tk_end_idx + right, len(text))
+
+        # Get CQL labeled token positions
+        captureGroups = {}
+        for i, keyword in enumerate(keywords):
+            if '__label__' in keyword:
+                for lab in keyword.get('__label__'):
+                    if lab not in captureGroups:
+                        captureGroups[lab] = []
+                    tk = self.get_corp_data(doc_idx, sent_idx, i + tk_idx)
+                    captureGroups[lab].append(tk)
 
         return {
             "left": text[start_idx:tk_start_idx],
@@ -52,7 +69,8 @@ class Concordancer(IndexedCorpus):
                 "doc_idx": doc_idx,
                 "sent_idx": sent_idx,
                 "tk_idx": tk_idx
-            }
+            },
+            "captureGroups": captureGroups
         }
 
 
