@@ -6,7 +6,57 @@ ESCAPE = chr(92)
 SPECIAL_SET = {r'\d', r'\D', r'\s', r'\S', r'\w', r'\W'}
 
 
-def match_corpus_token(values:list, tag:Union[str, int] , target: dict) -> bool:
+"""
+{
+    'match': {
+        'word': ['打'],
+        'pos': ['V.*']
+    }, 
+    'not_match': {
+        'pos': ['VH.*']
+    },
+    '__label__': ['l1']  #labels to attached to search results  
+}
+"""
+
+
+def queryMatchToken(queryTerm: dict, corpToken: dict):
+    if 'match' in queryTerm:
+        positive_matched_tag = 0
+        for tag, values in queryTerm.get('match').items():
+            if tag not in corpToken: return False
+            if allValues_match_token(values, tag, corpToken): 
+                positive_matched_tag += 1
+        
+        if positive_matched_tag != len(queryTerm.get('match')):
+            return False
+    
+    if 'not_match' in queryTerm:
+        negative_matched_tag = 0
+        counter = 0
+        for tag, values in queryTerm.get('not_match').items():
+            taget_value = queryTerm.get('not_match').get(tag)
+            for value in values:
+                counter += 1
+                value, mode = match_mode(value)
+                if mode == "literal":
+                    if value != taget_value:
+                        negative_matched_tag += 1
+                else:
+                    if (taget_value != None) and re.search(value, taget_value):
+                        negative_matched_tag += 1
+        
+        if negative_matched_tag != counter:
+            return False
+    
+    return True
+
+
+def label_corpToken():
+    pass
+
+
+def allValues_match_token(values:list, tag:Union[str, int] , target: dict) -> bool:
     """Check whether all CQL generated values match a token in corpus
 
     Parameters

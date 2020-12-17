@@ -5,80 +5,12 @@ from typing import Union
 from copy import deepcopy
 from collections import Counter
 from kwic_print import KWIC
-from utils import match_corpus_token
+from utils import queryMatchToken, match_mode
+from indexedCorpus import IndexedCorpus
 
 
-class Concordancer():
+class Concordancer(IndexedCorpus):
 
-    def __init__(self, corpus: list, text_key="text"):
-        """[summary]
-
-        Parameters
-        ----------
-        corpus : list
-            Corpus data
-
-        Notes
-        -----
-        Structure of corpus could be:
-            [
-                {
-                    "<text_dictkey>": [
-                        {"word": "<word>", "pos": "<pos>"},
-                        {"word": "<word>", "pos": "<pos>"},
-                        {"word": "<word>", "pos": "<pos>"},
-                        ...
-                    ],
-                    ...
-                }
-            ]
-        
-        Or, simply a nested list:
-            [
-                [
-                    [
-                        ["<word>", "<pos>"],
-                        ["<word>", "<pos>"],
-                        ["<word>", "<pos>"],
-                        ...
-                    ]
-                ],
-                [...],  # another text
-                ...
-            ]
-        """
-        self.corpus = corpus
-        self.corp_idx = {}
-        self.text_key = text_key
-
-        # Detect corpus structure
-        a_token = self.get_corp_data(doc_idx=0, sent_idx=0, tk_idx=0)
-        token_struct = type(a_token)
-        if (token_struct is not dict) and (token_struct is not list) and (token_struct is not str):
-            raise Exception(f"Structure of token in text should be dict, list, or str, not {token_struct}")
-        a_token = norm_token_struct(a_token)
-        for tag in a_token: self.corp_idx[tag] = {}
-
-        # Index corpus
-        for doc_idx, doc in enumerate(corpus):
-            if self.text_key is not None: enum = doc[text_key]
-            else: enum = doc
-            for sent_idx, sent in enumerate(enum):
-                for tk_idx, token in enumerate(sent):
-                    token = norm_token_struct(token)
-                    for tag, item in token.items():
-                        if item not in self.corp_idx[tag]:
-                            self.corp_idx[tag][item] = []
-                        position = (doc_idx, sent_idx, tk_idx)
-                        self.corp_idx[tag][item].append(position)
-                        
-                        # Update corpus structure
-                        if self.text_key is not None:
-                            self.corpus[doc_idx][self.text_key][sent_idx][tk_idx] = token
-                        else:
-                            self.corpus[doc_idx][sent_idx][tk_idx] = token
-
-    
     def kwic(self, keywords: Union[str, list], default_tag="word", left=5, right=5, regex=False):
 
         if default_tag not in self.corp_idx:
@@ -124,23 +56,17 @@ class Concordancer():
         }
 
 
-    def _search_keywords(self, keywords: list, default_tag="word", regex=False):
-        for i, keyword in enumerate(deepcopy(keywords)):
-            if isinstance(keyword, str):
-                keywords[i] = { f"{default_tag}": keyword.strip() }
-            else:
-                if not isinstance(keyword, dict): raise Exception("keywords should be a list of str or dict")
-        
+    def _search_keywords(self, keywords: list):
         #########################################################
         # Find keywords with the least number of matching results 
         #########################################################
         best_search_loc = (0, None, math.inf)
         for i, keyword in enumerate(keywords):
-            results = self._search_keyword(keyword, regex)
-            if results is None: 
-                return None
+            results = self._search_keyword(keyword)
             num_of_matched = len(results)
-            if num_of_matched < best_search_loc[-1]:
+            if num_of_matched == 0: 
+                return None
+            elif num_of_matched < best_search_loc[-1]:
                 best_search_loc = (i, results, num_of_matched)
         results = best_search_loc[1]
 
@@ -162,17 +88,19 @@ class Concordancer():
             # Check every token in keywords
             matched_num = 0
             for w_k, w_c in zip(keywords, candidates):
-                if is_subdict(w_k, w_c, regex):
+                if queryMatchToken(queryTerm=w_k, corpToken=w_c):
                     matched_num += 1
             if matched_num == len(keywords):
                 first_keyword_idx = idx[2] - keyword_anchor['seed_idx']
                 matched_results.append( [idx[0], idx[1], first_keyword_idx] )
+            
+            ###### ToDo: Add label to results #######
         
         return matched_results
 
 
     def _search_keyword(self, keyword: dict):
-        """Search keyword with complex conditions in the corpus
+        """Global search of a keyword to find candidates of correct kwic instances
 
         Parameters
         ----------
@@ -195,40 +123,113 @@ class Concordancer():
         list
             A list of matching indicies
         """
-        matched_indicies = []
-        candidate_indicies = []
+        positive_match = set()
+        negative_match = set()
 
         # Deal with empty token {}
-        if len(keyword) == 0:
-            tag = list(self.corp_idx.keys())[0]
-            for _, v in self.corp_idx[tag].items():
-                matched_indicies += v
-            return list(set(matched_indicies))
+        if ('match' not in keyword) and ('not_match' not in keyword):
+            return self.all_tk_idx
 
         else:
-
-            # Loop over match
-            matching_idicies = []
+            ########################################
+            ##########   POSITIVE MATCH   ##########
+            ########################################
+            matching_idicies = Counter()
             for tag, values in keyword['match'].items():
-                
-                # Get intersections of all values
-                for value in values:
-                    pass
-                matching_idicies += self.intersect_search(tag, values)
+                # Check all values of a specific tag
+                for idx in self.intersect_search(tag, values):
+                    matching_idicies.update({idx: 1})
+            
+            # Get indicies that matched all given tags 
+            for idx, count in matching_idicies.items():
+                if count == len(keyword['match']):
+                    positive_match.add(idx)
+            
+            # Special case: match is empty
+            if len(keyword['match']) == 0:
+                positive_match = self.all_tk_idx
+            
+            ########################################
+            ##########   NEGATIVE MATCH   ##########
+            ########################################
+            for tag, values in keyword['not_match'].items():
+                for idx in self.union_search(tag, values):
+                    negative_match.add(idx)
 
-            # Loop over non_match and delete if conditions met
-            indicies_toremove = set()
-            for idx in matched_indicies:
-                token = self.get_corp_data(*idx)
-                for tag, values in keyword['not_match'].items():
-                    if match_corpus_token(values, tag, target=token):
-                        indicies_toremove.add(idx)
-            matching_idicies = [ i for i in matching_idicies if i not in indicies_toremove ] 
+            ########################################
+            #####  POSITIVE - NEGATIVE MATCH  ######
+            ########################################
+            positive_match.difference_update(negative_match)
 
-
-        if len(matched_indicies) == 0:
+        if len(positive_match) == 0:
             print(f"{keyword} not found in corpus")
+
+        return positive_match
+
+
+    def union_search(self, tag:Union[str, int], values:list):
+        """Given candidates values, return from corpus the position 
+        of tokens matching any of the values
+
+        Parameters
+        ----------
+        tag : Union[str, int]
+            The tag of the token used for comparison
+        values : list
+            A list of values to compare with
+        """
+        matched_indicies = set()
+
+        for value in values:
+            value, mode = match_mode(value)
+            if mode == "literal":
+                if value in self.corp_idx[tag]:
+                    for idx in self.corp_idx[tag][value]: 
+                        matched_indicies.add(idx)
+            else:
+                for term in self.corp_idx[tag]:
+                    if re.search(value, term):
+                        for idx in self.corp_idx[tag][term]:
+                            matched_indicies.add(idx)
+        
         return matched_indicies
+
+
+    def intersect_search(self, tag:Union[str, int], values:list):
+        """Given candidates values, return from corpus the position 
+        of tokens matching all values
+
+        Parameters
+        ----------
+        tag : Union[str, int]
+            The tag of the token used for comparison
+        values : list
+            A list of values to compare with
+        """
+        # Get intersections of all values
+        match_count = Counter()
+        for value in values:
+            value, mode = match_mode(value)
+            indices = []
+            if mode == "literal":
+                if value in self.corp_idx[tag]:
+                    indices = self.corp_idx[tag][value]
+            else:
+                for term in self.corp_idx[tag]:
+                    if re.search(value, term):
+                        indices += self.corp_idx[tag][term]
+            
+            for idx in set(indices):
+                match_count.update({idx: 1})
+        
+        # Filter idicies that match all values given
+        intersect_match = set()
+        for idx, count in match_count.items():
+            if count == len(values):
+                intersect_match.add(idx)
+        
+        return intersect_match
+        
 
 
     def _get_keywords(self, search_anchor: dict, doc_idx, sent_idx, tk_idx):
