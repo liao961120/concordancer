@@ -1,3 +1,6 @@
+[![Support Python
+Version](https://img.shields.io/badge/python-%E2%89%A5%203.7-blue.svg)]
+
 # Concordancer
 
 This module loads and indexes a corpus in RAM and provides concordance search to retrieve data from the corpus using (a subset of) Corpus Query Language (CQL).
