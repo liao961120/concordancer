@@ -1,21 +1,20 @@
-#%%
 import re
 import math
+import cqls
 from typing import Union
 from copy import deepcopy
 from collections import Counter
-from utils import queryMatchToken, match_mode
-from indexedCorpus import IndexedCorpus
-import cqls
+from .utils import queryMatchToken, match_mode
+from .indexedCorpus import IndexedCorpus
 
 
 class Concordancer(IndexedCorpus):
 
-    cql_default_attr = "word"
-    cql_max_quantity = 6
+    _cql_default_attr = "word"
+    _cql_max_quantity = 6
 
     def cql_search(self, cql: str, left=5, right=5):
-        queries = cqls.parse(cql, default_attr=self.cql_default_attr,max_quant=self.cql_max_quantity)
+        queries = cqls.parse(cql, default_attr=self._cql_default_attr,max_quant=self._cql_max_quantity)
 
         results = []
         for query in queries:
@@ -25,8 +24,8 @@ class Concordancer(IndexedCorpus):
 
 
     def set_cql_parameters(self, default_attr: str, max_quant: int):
-        self.cql_default_attr = default_attr
-        self.cql_max_quantity = max_quant
+        self._cql_default_attr = default_attr
+        self._cql_max_quantity = max_quant
 
 
     def kwic(self, keywords: list, left=5, right=5):

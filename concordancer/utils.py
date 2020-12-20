@@ -5,21 +5,6 @@ REGEX_META = set('[].^$*+{}|()')
 ESCAPE = chr(92)
 SPECIAL_SET = {r'\d', r'\D', r'\s', r'\S', r'\w', r'\W'}
 
-
-"""
-{
-    'match': {
-        'word': ['打'],
-        'pos': ['V.*']
-    }, 
-    'not_match': {
-        'pos': ['VH.*']
-    },
-    '__label__': ['l1']  #labels to attached to search results  
-}
-"""
-
-
 def queryMatchToken(queryTerm: dict, corpToken: dict):
     if 'match' in queryTerm:
         positive_matched_tag = 0
@@ -51,9 +36,6 @@ def queryMatchToken(queryTerm: dict, corpToken: dict):
     
     return True
 
-
-def label_corpToken():
-    pass
 
 
 def allValues_match_token(values:list, tag:Union[str, int] , target: dict) -> bool:
