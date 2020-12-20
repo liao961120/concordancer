@@ -6,3 +6,5 @@ test*
 /build
 /*.egg-info
 /dist
+!tokenDict.jsonl
+!tokenList.jsonl
