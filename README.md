@@ -1,5 +1,4 @@
-[![Support Python
-Version](https://img.shields.io/badge/python-%E2%89%A5%203.7-blue.svg)]
+![Support Python Version](https://img.shields.io/badge/python-%E2%89%A5%203.7-blue.svg)
 
 # Concordancer
 
