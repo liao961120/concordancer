@@ -21,7 +21,7 @@ from concordancer.kwic_print import KWIC
 
 # Read corpus from file
 corpus = []
-with open("test-data/tokenDict.jsonl") as f:
+with open("example-corpus-data/tokenDict.jsonl") as f:
     for l in f:
         corpus.append(json.loads(l))
 
