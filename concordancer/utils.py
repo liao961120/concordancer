@@ -28,6 +28,7 @@ def queryMatchToken(queryTerm: dict, corpToken: dict):
                     if value != taget_value:
                         negative_matched_tag += 1
                 else:
+                    value = append_regex_anchors(value)
                     if (taget_value != None) and re.search(value, taget_value):
                         negative_matched_tag += 1
         
@@ -60,6 +61,7 @@ def allValues_match_token(values:list, tag:Union[str, int] , target: dict) -> bo
     for value in values:
         value, mode = match_mode(value)
         if mode == "regex":
+            value = append_regex_anchors(value)
             if re.search(value, target[tag]):
                 matched_num += 1
         if mode == "literal":
@@ -69,6 +71,12 @@ def allValues_match_token(values:list, tag:Union[str, int] , target: dict) -> bo
     return matched_num == len(values)
 
 
+def append_regex_anchors(x: str):
+    if not x.startswith('^'):
+        x = '^' + x
+    if not x.endswith('$'):
+        x += '$'
+    return x
 
 def match_mode(x: str):
     if is_regex(x):

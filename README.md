@@ -45,21 +45,21 @@ The result of the concordance search is a list of dictionaries, which can easily
 >>> concord_list[:2]
 [
     {
-        'left': [{'word': '來', 'pos': 'VA'}, {'word': '一', 'pos': 'Neu'}],
-        'keyword': [{'word': '小', 'pos': 'VH'}, {'word': '段', 'pos': 'Nf'}],
-        'right': [{'word': '故事', 'pos': 'Na'},
-                  {'word': '。', 'pos': 'PERIODCATEGORY'}],
-        'position': {'doc_idx': 16, 'sent_idx': 3, 'tk_idx': 21},
-        'captureGroups': {'verb': [{'word': '小', 'pos': 'VH'}],
-                          'noun': [{'word': '段', 'pos': 'Nf'}]}
+        'left': [{'word': '買', 'pos': 'VC'}, {'word': '了', 'pos': 'Di'}],
+        'keyword': [{'word': '覺得', 'pos': 'VK'}, {'word': '材質', 'pos': 'Na'}],
+        'right': [{'word': '很', 'pos': 'Dfa'}, {'word': '對', 'pos': 'VH'}],
+        'position': {'doc_idx': 78, 'sent_idx': 13, 'tk_idx': 9},
+        'captureGroups': {'verb': [{'word': '覺得', 'pos': 'VK'}],
+                          'noun': [{'word': '材質', 'pos': 'Na'}]}
     },
     {
-        'left': [{'word': '長度', 'pos': 'Na'}, {'word': '剛好', 'pos': 'Da'}],
-        'keyword': [{'word': '蓋住', 'pos': 'VC'}, {'word': '這', 'pos': 'Nep'}],
-        'right': [{'word': '件', 'pos': 'Nf'}, {'word': '裙子', 'pos': 'Na'}],
-        'position': {'doc_idx': 78, 'sent_idx': 59, 'tk_idx': 4},
-        'captureGroups': {'verb': [{'word': '蓋住', 'pos': 'VC'}],
-                          'noun': [{'word': '這', 'pos': 'Nep'}]}
+        'left': [{'word': '“', 'pos': 'PARENTHESISCATEGORY'},
+                 {'word': '不', 'pos': 'D'}],
+        'keyword': [{'word': '戴', 'pos': 'VC'}, {'word': '錶', 'pos': 'Na'}],
+        'right': [{'word': '世代', 'pos': 'Na'}, {'word': '”', 'pos': 'VC'}],
+        'position': {'doc_idx': 52, 'sent_idx': 7, 'tk_idx': 36},
+        'captureGroups': {'verb': [{'word': '戴', 'pos': 'VC'}],
+                          'noun': [{'word': '錶', 'pos': 'Na'}]}
     }
 ]
 ```
@@ -68,13 +68,13 @@ To better read the concordance lines, you can pass `concord_list` into `concorda
 
 ```python
 >>> KWIC(concord_list[:5])
-left             keyword                         right                      LABEL: verb    LABEL: noun
----------------  ------------------------------  -------------------------  -------------  ----------------------
-來/VA 一/Neu     小/VH 段/Nf                     故事/Na 。/PERIODCATEGORY  小/VH          段/Nf
-長度/Na 剛好/Da  蓋住/VC 這/Nep                  件/Nf 裙子/Na              蓋住/VC        這/Nep
-復古/VH 帥氣/VH  穿搭/VA ！/EXCLAMATIONCATEGORY  <URL>/FW 身高/Na           穿搭/VA        ！/EXCLAMATIONCATEGORY
-長/VH 的話/Cba   有/V_2 什麼/Nep                 解決/VC 的/DE              有/V_2         什麼/Nep
-買/VC 了/Di      覺得/VK 材質/Na                 很/Dfa 對/VH               覺得/VK        材質/Na
+left                        keyword          right             LABEL: verb    LABEL: noun
+--------------------------  ---------------  ----------------  -------------  -------------
+買/VC 了/Di                 覺得/VK 材質/Na  很/Dfa 對/VH      覺得/VK        材質/Na
+“/PARENTHESISCATEGORY 不/D  戴/VC 錶/Na      世代/Na ”/VC      戴/VC          錶/Na
+聯名鞋/Na 趁著/P            過年/VA 期間/Na  穿出去/VB 四處/D  過年/VA        期間/Na
+走/VA  /WHITESPACE          燒/VC 錢/Na      啊/T ～/FW        燒/VC          錢/Na
+正/VH 韓/Nc                 賣/VD 家/Nc      裡面/Ncd 很/Dfa   賣/VD          家/Nc
 ```
 
 
