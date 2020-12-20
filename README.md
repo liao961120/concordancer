@@ -36,7 +36,7 @@ C.set_cql_parameters(default_attr="word", max_quant=3)
 
 ```python
 cql = '''
-[pos="V.*"]+
+verb:[pos="V.*"] noun:[pos="N[abch]"]
 '''
 concord_list = C.cql_search(cql, left=2, right=2)
 ```
