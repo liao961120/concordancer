@@ -25,7 +25,7 @@ with open("test-data/tokenDict.jsonl") as f:
     for l in f:
         corpus.append(json.loads(l))
 
-# Index and initiate the corpus as a concordance object
+# Index and initiate the corpus as a concordancer object
 C = Concordancer(corpus)
 C.set_cql_parameters(default_attr="word", max_quant=3)
 ```
