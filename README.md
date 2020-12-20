@@ -82,7 +82,7 @@ left                        keyword          right             LABEL: verb    LA
 
 ## Supported CQL features
 
-CQL search is supported through [`cqls`](https://github.com/liao961120/cqls). A subset of useful CQL is supported:
+CQL search is supported through [`cqls`](https://github.com/liao961120/cqls), in which a subset of (quite useful) CQL is implemented:
 
 - token: `[]`, `"我"`, `[word="我"]`, `[word!="我" & pos="N.*"]`
 - token-level quantifier: `+`, `*`, `?`, `{n,m}`
