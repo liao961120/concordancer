@@ -64,7 +64,7 @@ The result of the concordance search is a list of dictionaries, which can easily
 ]
 ```
 
-To better read the concordance lines, you can pass `concord_list` into `concordancer.kwic_print.KWIC()` to read them as keyword-in-context format in the console:
+To better read the concordance lines, you can pass `concord_list` into `concordancer.kwic_print.KWIC()` to read them as a keyword-in-context format in the console:
 
 ```python
 >>> KWIC(concord_list[:5])
