@@ -36,7 +36,7 @@ C.set_cql_parameters(default_attr="word", max_quant=3)
 
 ```python
 cql = '''
-[pos="V.*"]+
+verb:[pos="V.*"] noun:[pos="N[abch]"]
 '''
 concord_list = C.cql_search(cql, left=2, right=2)
 ```
@@ -66,7 +66,7 @@ The result of the concordance search is a list of dictionaries, which can easily
 ]
 ```
 
-To better read the concordance lines, you can pass `concord_list` into `concordancer.kwic_print.KWIC()` to read them as a keyword-in-context format in the console:
+To better read the concordance lines, you can pass `concord_list` into `concordancer.kwic_print.KWIC()` to print them as a keyword-in-context format in the console:
 
 ```python
 >>> KWIC(concord_list[:5])
@@ -82,7 +82,7 @@ left                        keyword          right             LABEL: verb    LA
 
 ## Supported CQL features
 
-CQL search is supported through [`cqls`](https://github.com/liao961120/cqls). A subset of useful CQL is supported:
+CQL search is supported through [`cqls`](https://github.com/liao961120/cqls), in which a (quite useful) subset of CQL is implemented:
 
 - token: `[]`, `"我"`, `[word="我"]`, `[word!="我" & pos="N.*"]`
 - token-level quantifier: `+`, `*`, `?`, `{n,m}`
