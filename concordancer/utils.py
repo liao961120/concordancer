@@ -20,16 +20,16 @@ def queryMatchToken(queryTerm: dict, corpToken: dict):
         negative_matched_tag = 0
         counter = 0
         for tag, values in queryTerm.get('not_match').items():
-            taget_value = queryTerm.get('not_match').get(tag)
+            target_value = corpToken.get(tag, None)
             for value in values:
                 counter += 1
                 value, mode = match_mode(value)
                 if mode == "literal":
-                    if value != taget_value:
+                    if value != target_value:
                         negative_matched_tag += 1
                 else:
                     value = append_regex_anchors(value)
-                    if (taget_value != None) and re.search(value, taget_value):
+                    if (target_value != None) and re.search(value, target_value):
                         negative_matched_tag += 1
         
         if negative_matched_tag != counter:
@@ -72,6 +72,7 @@ def allValues_match_token(values:list, tag:Union[str, int] , target: dict) -> bo
 
 
 def append_regex_anchors(x: str):
+    x = "(" + x + ")"
     if not x.startswith('^'):
         x = '^' + x
     if not x.endswith('$'):
