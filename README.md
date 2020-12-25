@@ -8,7 +8,7 @@ This module loads and indexes a corpus in RAM and provides concordance search to
 ## Installation
 
 ```bash
-pip install concordaner
+pip install concordancer
 ```
 
 
