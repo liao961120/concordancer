@@ -18,6 +18,9 @@ class IndexedCorpus:
         Notes
         -----
         Structure of corpus could be:
+
+        .. code-block:: python
+
             [
                 {
                     "<text_dictkey>": [
@@ -31,6 +34,9 @@ class IndexedCorpus:
             ]
         
         Or, simply a nested list:
+
+        .. code-block:: python
+        
             [
                 [
                     [

@@ -124,6 +124,9 @@ class Concordancer(IndexedCorpus):
         keyword : dict
             A dictionary specifying the matching conditions of
             the keyword:
+
+            .. code-block:: python
+            
                 {
                     'match': {
                         'word': ['打'],
