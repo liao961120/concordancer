@@ -8,6 +8,7 @@ from falcon_cors import CORS
 from wsgiref import simple_server
 from .concordancer import Concordancer
 
+FRONTEND_ZIP = 'https://yongfu.name/kwic2/dist.zip'
 
 def run(Concordancer, port=1420, url=None):
     # Allow access from frontend
@@ -31,8 +32,8 @@ def run(Concordancer, port=1420, url=None):
 class ConcordancerBackend(object):
     def __init__(self, Concordancer):
         # Initialize corpus
-        self.CONCORDANCE_CACHE = []
         self.C = Concordancer
+        self.concord_list = []
 
     def on_get(self, req, resp):
         params = {
@@ -58,7 +59,7 @@ class ConcordancerBackend(object):
             resp.body = 'CQL Syntax error'
 
         # Query Database
-        concord_list = self.C.cql_search(
+        self.concord_list = self.C.cql_search(
             cql, left=params['left'], right=params['right']
         )
 
@@ -67,22 +68,21 @@ class ConcordancerBackend(object):
         print("Sending response...")
         ############ _DEBUGGING ##############
         resp.status = falcon.HTTP_200  # This is the default status
-        self.CONCORDANCE_CACHE = concord_list
-        resp.body = json.dumps(concord_list, ensure_ascii=False)
+        resp.body = json.dumps(self.concord_list, ensure_ascii=False)
         ############ DEBUGGING ##############
         print("Response sent !!!")
         ############ _DEBUGGING ##############
 
     def on_get_export(self, req, resp):
         # Process concordance to tsv
-        resp.body = json.dumps(self.CONCORDANCE_CACHE, ensure_ascii=False, indent="\t")
+        resp.body = json.dumps(self.concord_list, ensure_ascii=False, indent="\t")
 
 
 
 ########################################
 ##### Code for front-end interface #####
 ########################################
-def download_query_interface(url, force=False):
+def download_query_interface(url=None, force=False):
     """Download and extract front-end interface for query
 
     Parameters
@@ -105,6 +105,8 @@ def download_query_interface(url, force=False):
     tgt_dir = pathlib.Path(concordancer.server.__file__).parents[0]
 
     # Download data
+    if url is None:
+        url = FRONTEND_ZIP
     urllib.request.urlretrieve(url, tgt_dir / "dist.zip")
     
     # Extract zip file
