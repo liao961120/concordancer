@@ -6,3 +6,5 @@ test*
 /build
 /*.egg-info
 /dist
+dist
+dist.zip

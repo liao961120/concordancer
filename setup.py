@@ -13,6 +13,6 @@ setup(name='concordancer',
       author_email='liao961120@github.com',
       license='MIT',
       packages=['concordancer'],
-      install_requires=['cqls', 'tabulate'],
+      install_requires=['cqls', 'tabulate', 'falcon', 'falcon-cors'],
       #tests_require=['cqls'],
       zip_safe=False)
