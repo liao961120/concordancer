@@ -95,7 +95,9 @@ Initializing server...
 Start serving at http://localhost:1420
 ```
 
-This will open a query interface where you can interact with the corpus
+This will open a query interface where you can interact with the corpus.
+
+Currently, due to the conflicts between some CQL metacharacters and URI special characters, some query may break. Avoid this by NOT using characters such as **`{`, `}`** 
 
 
 ## Supported CQL features

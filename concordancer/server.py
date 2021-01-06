@@ -53,7 +53,7 @@ class ConcordancerBackend(object):
         ############ _DEBUGGING ##############
 
         # Test CQL syntax
-        cql = params['query'].replace(' _AMPERSAND_ ', '&')
+        cql = params['query'].replace('_AMPERSAND_', '&')
         print(cql)
         try:
             cqls.parse(cql)
