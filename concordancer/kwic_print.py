@@ -1,10 +1,10 @@
 from copy import deepcopy
 from tabulate import tabulate
-from typing import Sequence
+from typing import Union, Sequence, Generator
 
 class KWIC:
-    def __init__(self, concordance: list, print_idx:Sequence[int]=range(10)):
-        self.data = deepcopy(concordance)
+    def __init__(self, concordance:Union[Sequence, Generator], print_idx:Sequence[int]=range(10)):
+        self.data = concordance
         self.print_keys = ['left', 'keyword', 'right', 'captureGroups']
         self.captureGroup_keys = set()
         self.print_idx = print_idx

@@ -5,6 +5,7 @@ import falcon
 import pathlib
 import logging
 import webbrowser
+from urllib.parse import unquote
 from falcon_cors import CORS
 from wsgiref import simple_server
 from .concordancer import Concordancer
@@ -52,7 +53,8 @@ class ConcordancerBackend(object):
         ############ _DEBUGGING ##############
 
         # Test CQL syntax
-        cql = params['query']
+        cql = params['query'].replace(' _AMPERSAND_ ', '&')
+        print(cql)
         try:
             cqls.parse(cql)
         except:
@@ -60,8 +62,12 @@ class ConcordancerBackend(object):
             resp.body = 'CQL Syntax error'
 
         # Query Database
-        self.concord_list = self.C.cql_search(
-            cql, left=params['left'], right=params['right']
+        self.concord_list = list(
+            self.C.cql_search(
+                cql, 
+                left=params['left'], 
+                right=params['right']
+            )
         )
 
         # Response to frontend
@@ -76,7 +82,7 @@ class ConcordancerBackend(object):
 
     def on_get_export(self, req, resp):
         # Process concordance to tsv
-        resp.body = json.dumps(self.concord_list, ensure_ascii=False, indent="\t")
+        resp.body = json.dumps(list(self.concord_list), ensure_ascii=False, indent="\t")
 
 
 

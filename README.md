@@ -18,19 +18,19 @@ pip install concordancer
 
 ```python
 import json
+from concordancer.demo import download_demo_corpus
 from concordancer.concordancer import Concordancer
-from concordancer.kwic_print import KWIC
 
-# Read corpus from file
-corpus = []
-with open("example-corpus-data/tokenDict.jsonl") as f:
-    for l in f:
-        corpus.append(json.loads(l))
+# Load demo corpus
+fp = download_demo_corpus(to="~/Desktop")
+with open(fp, encoding="utf-8") as f:
+    corpus = [ json.loads(l) for l in f ]
 
 # Index and initiate the corpus as a concordancer object
 C = Concordancer(corpus)
 C.set_cql_parameters(default_attr="word", max_quant=3)
 ```
+
 
 ### CQL Concordance search
 
@@ -41,9 +41,10 @@ verb:[pos="V.*"] noun:[pos="N[abch]"]
 concord_list = C.cql_search(cql, left=2, right=2)
 ```
 
-The result of the concordance search is a list of dictionaries, which can easily be converted to JSON or other data structures for further uses:
+The result of the concordance search is a generator, which can be converted to a list of dictionaries (and then to JSON or other data structures for further uses):
 
 ```python
+>>> concord_list = list(concord_list)
 >>> concord_list[:2]
 [
     {
@@ -66,9 +67,13 @@ The result of the concordance search is a list of dictionaries, which can easily
 ]
 ```
 
-To better read the concordance lines, you can pass `concord_list` into `concordancer.kwic_print.KWIC()` to print them as a keyword-in-context format in the console:
+
+### Keyword in Context
+
+To better read the concordance lines, pass `concord_list` into `concordancer.kwic_print.KWIC()` to print them as a keyword-in-context format in the console:
 
 ```python
+>>> from concordancer.kwic_print import KWIC
 >>> KWIC(concord_list[:5])
 left                        keyword          right             LABEL: verb    LABEL: noun
 --------------------------  ---------------  ----------------  -------------  -------------
@@ -78,6 +83,19 @@ left                        keyword          right             LABEL: verb    LA
 走/VA  /WHITESPACE          燒/VC 錢/Na      啊/T ～/FW        燒/VC          錢/Na
 正/VH 韓/Nc                 賣/VD 家/Nc      裡面/Ncd 很/Dfa   賣/VD          家/Nc
 ```
+
+### Interactive Search Interface
+
+Alternatively, you can start an interactive server to query and read results through your browser:
+
+```python
+>>> from concordancer import server 
+>>> server.run(C)
+Initializing server...
+Start serving at http://localhost:1420
+```
+
+This will open a query interface where you can interact with the corpus
 
 
 ## Supported CQL features

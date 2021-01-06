@@ -16,11 +16,9 @@ class Concordancer(IndexedCorpus):
     def cql_search(self, cql: str, left=5, right=5):
         queries = cqls.parse(cql, default_attr=self._cql_default_attr,max_quant=self._cql_max_quantity)
 
-        results = []
         for query in queries:
-            results += self.kwic(keywords=query, left=left, right=right)
-        
-        return results
+            for result in self.kwic(keywords=query, left=left, right=right):
+                yield result
 
 
     def set_cql_parameters(self, default_attr: str, max_quant: int):
@@ -30,16 +28,13 @@ class Concordancer(IndexedCorpus):
 
     def kwic(self, keywords: list, left=5, right=5):
         # Get concordance from corpus
-        concordance_list = []
         search_results = self._search_keywords(keywords)
         if search_results is None: 
-            return search_results
+            return []
         for doc_idx, sent_idx, tk_idx in search_results:
             cc = self._kwic_single(doc_idx, sent_idx, tk_idx, tk_len=len(keywords), left=left, right=right, keywords=keywords)
-            concordance_list.append(cc)
+            yield cc
         
-        return concordance_list
-
         
     def _kwic_single(self, doc_idx, sent_idx, tk_idx, tk_len=1, left=5, right=5, keywords:list=None):
         # Flatten doc sentences to a list of tokens
@@ -111,8 +106,6 @@ class Concordancer(IndexedCorpus):
                 first_keyword_idx = idx[2] - keyword_anchor['seed_idx']
                 matched_results.append( [idx[0], idx[1], first_keyword_idx] )
             
-            ###### ToDo: Add label to results #######
-        
         return matched_results
 
 
