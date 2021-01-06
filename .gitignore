@@ -8,3 +8,4 @@ test*
 /dist
 dist
 dist.zip
+!demo_corpus.jsonl.zip
