@@ -3,6 +3,7 @@ import json
 import cqls
 import falcon
 import pathlib
+import logging
 import webbrowser
 from falcon_cors import CORS
 from wsgiref import simple_server
@@ -82,7 +83,7 @@ class ConcordancerBackend(object):
 ########################################
 ##### Code for front-end interface #####
 ########################################
-def download_query_interface(url=None, force=False):
+def download_query_interface(url=None, force=True):
     """Download and extract front-end interface for query
 
     Parameters
@@ -95,16 +96,15 @@ def download_query_interface(url=None, force=False):
     """
     fp = query_interface_path()
     if os.path.exists(fp):
-        print(f"frontend interface already exists in {fp}")
+        logging.info(f"frontend interface already exists in {fp}")
         if not force: return
 
     import zipfile
     import urllib.request
     import concordancer.server
 
-    tgt_dir = pathlib.Path(concordancer.server.__file__).parents[0]
-
     # Download data
+    tgt_dir = pathlib.Path(concordancer.server.__file__).parents[0]
     if url is None:
         url = FRONTEND_ZIP
     urllib.request.urlretrieve(url, tgt_dir / "dist.zip")
