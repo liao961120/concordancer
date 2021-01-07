@@ -10,7 +10,7 @@ from falcon_cors import CORS
 from wsgiref import simple_server
 from .concordancer import Concordancer
 
-FRONTEND_ZIP = 'https://yongfu.name/kwic2/dist.zip'
+FRONTEND_ZIP = 'https://github.com/liao961120/concordancer/raw/query-interface/dist.zip'
 URL_ESCAPES = [
     ["{", "___LCURLY_BRACKET___"],
     ["}", "___RCURLY_BRACKET___"],
