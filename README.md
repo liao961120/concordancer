@@ -43,6 +43,8 @@ server.run(C)
 
 ### CQL Concordance search
 
+Alternatively, you can work with the `Concordancer` object, which allows you to send CQL queries to the corpus:
+
 ```python
 cql = '''
 verb:[pos="V.*"] noun:[pos="N[abch]"]
@@ -50,7 +52,7 @@ verb:[pos="V.*"] noun:[pos="N[abch]"]
 concord_list = C.cql_search(cql, left=2, right=2)
 ```
 
-The result of the concordance search is a generator, which can be converted to a list of dictionaries (and then to JSON or other data structures for further uses):
+The results of a query is returned as a generator, which can be converted to a list of dictionaries (and then to JSON or other data structures for further uses):
 
 ```python
 >>> concord_list = list(concord_list)
@@ -92,9 +94,6 @@ left                        keyword          right             LABEL: verb    LA
 走/VA  /WHITESPACE          燒/VC 錢/Na      啊/T ～/FW        燒/VC          錢/Na
 正/VH 韓/Nc                 賣/VD 家/Nc      裡面/Ncd 很/Dfa   賣/VD          家/Nc
 ```
-
-
-This will open a query interface where you can interact with the corpus.
 
 
 ## Supported CQL features
