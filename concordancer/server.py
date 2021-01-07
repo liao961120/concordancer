@@ -11,8 +11,27 @@ from wsgiref import simple_server
 from .concordancer import Concordancer
 
 FRONTEND_ZIP = 'https://yongfu.name/kwic2/dist.zip'
+URL_ESCAPES = [
+    ["{", "___LCURLY_BRACKET___"],
+    ["}", "___RCURLY_BRACKET___"],
+    ["[", "___LSQUARE_BRACKET___"],
+    ["]", "___RSQUARE_BRACKET___"],
+    [chr(92), "___BACKSLASH___"],
+    ["^", "___START_ANCHOR___"],
+    [";", "___SEMICOLON___"],
+    ["/", "___SLASH___"],
+    ["?", "___QUESTION___"],
+    [":", "___COLON___"],
+    ["@", "___AT___"],
+    ["&", "___AMPERSAND___"],
+    ["=", "___EQUAL___"],
+    ["+", "___PLUS___"],
+    ["$", "___END_ANCHOR___"],
+    [",", "___COMMA___"],
+]
 
-def run(Concordancer, port=1420, url=None):
+
+def run(Concordancer, port=1420, url=None, open_browser=True):
     # Allow access from frontend
     cors = CORS(allow_all_origins=True)
 
@@ -27,7 +46,8 @@ def run(Concordancer, port=1420, url=None):
     print(f"Start serving at http://localhost:{port}")
     if url is None:
         url = query_interface_path()
-    webbrowser.open(url)
+    if open_browser:
+        webbrowser.open(url)
     httpd.serve_forever()
 
 
@@ -53,7 +73,9 @@ class ConcordancerBackend(object):
         ############ _DEBUGGING ##############
 
         # Test CQL syntax
-        cql = params['query'].replace('_AMPERSAND_', '&')
+        cql = params['query']
+        for char, escape in URL_ESCAPES:
+            cql = cql.replace(escape, char)
         print(cql)
         try:
             cqls.parse(cql)
@@ -64,8 +86,8 @@ class ConcordancerBackend(object):
         # Query Database
         self.concord_list = list(
             self.C.cql_search(
-                cql, 
-                left=params['left'], 
+                cql,
+                left=params['left'],
                 right=params['right']
             )
         )
@@ -82,8 +104,8 @@ class ConcordancerBackend(object):
 
     def on_get_export(self, req, resp):
         # Process concordance to tsv
-        resp.body = json.dumps(list(self.concord_list), ensure_ascii=False, indent="\t")
-
+        resp.body = json.dumps(list(self.concord_list),
+                               ensure_ascii=False, indent="\t")
 
 
 ########################################
@@ -103,7 +125,8 @@ def download_query_interface(url=None, force=True):
     fp = query_interface_path()
     if os.path.exists(fp):
         logging.info(f"frontend interface already exists in {fp}")
-        if not force: return
+        if not force:
+            return
 
     import zipfile
     import urllib.request
@@ -114,13 +137,13 @@ def download_query_interface(url=None, force=True):
     if url is None:
         url = FRONTEND_ZIP
     urllib.request.urlretrieve(url, tgt_dir / "dist.zip")
-    
+
     # Extract zip file
     with zipfile.ZipFile(tgt_dir / "dist.zip", 'r') as zip_ref:
         zip_ref.extractall(tgt_dir)
-    
+
     return tgt_dir
-    
+
 
 def query_interface_path():
     import concordancer.server

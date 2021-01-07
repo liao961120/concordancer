@@ -8,7 +8,7 @@ This module loads and indexes a corpus in RAM and provides concordance search to
 ## Installation
 
 ```bash
-pip install concordancer
+pip install -U concordancer
 ```
 
 
@@ -96,8 +96,6 @@ Start serving at http://localhost:1420
 ```
 
 This will open a query interface where you can interact with the corpus.
-
-Currently, due to the conflicts between certain CQL metacharacters and URI special characters, some query may break. Avoid this by NOT using characters such as **`{` and `}`** (other metacharacters not tested yet).
 
 
 ## Supported CQL features
