@@ -31,6 +31,15 @@ C = Concordancer(corpus)
 C.set_cql_parameters(default_attr="word", max_quant=3)
 ```
 
+### Interactive Search Interface
+
+You can start an interactive server to query and read results through your browser:
+
+```python
+from concordancer import server 
+server.run(C)
+```
+
 
 ### CQL Concordance search
 
@@ -84,16 +93,6 @@ left                        keyword          right             LABEL: verb    LA
 正/VH 韓/Nc                 賣/VD 家/Nc      裡面/Ncd 很/Dfa   賣/VD          家/Nc
 ```
 
-### Interactive Search Interface
-
-Alternatively, you can start an interactive server to query and read results through your browser:
-
-```python
->>> from concordancer import server 
->>> server.run(C)
-Initializing server...
-Start serving at http://localhost:1420
-```
 
 This will open a query interface where you can interact with the corpus.
 
