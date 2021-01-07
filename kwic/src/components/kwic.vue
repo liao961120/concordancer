@@ -387,8 +387,8 @@ button#search {
   font-size: 0.7em;
   /* text-align: left; */
 }
-.num-of-results:before {
-  content: "總筆數：";
+.num-of-results:after {
+  content: " results";
 }
 
 button {
