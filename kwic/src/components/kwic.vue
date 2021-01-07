@@ -6,10 +6,15 @@
           <input
             type="text"
             spellcheck="false"
-            placeholder='CQL: e.g., "一" [pos="N.*"]'
+            placeholder='CQL: e.g., "一" [pos="N.*"]{2}'
             v-model.lazy="query.query"
           />
           <button v-on:click="searchDB" id="search">Query</button>
+
+            <div class="info">
+              <button @click="exportData" :disabled="isExporting">Export</button>
+              <span class="num-of-results">{{ this.results.length }}</span>
+          </div>
         </div>
         <ul class="setting">
           <li>
@@ -28,12 +33,16 @@
             show tag (context):
             <input type="checkbox" v-model="displayOpt.ctx.tag" />
           </li>
+          <li>
+            Space b/w tokens:
+            <input type="checkbox" v-model="displayOpt.token_sep" />
+          </li>
+          <li>
+            Default token attribute:
+            <span class="default_attr" v-if="defaultAttr != null">{{ defaultAttr }}</span>
+          </li>
           <li class="this-is-placeholder"></li>
         </ul>
-      </div>
-      <div class="info">
-        <button @click="exportData" :disabled="isExporting">Export</button>
-        <span class="num-of-results">{{ this.results.length }}</span>
       </div>
     </div>
 
@@ -56,22 +65,25 @@
         <span class="left" v-bind:style="{ width: kwicStyCtxWidth + '%' }">{{
           item["left"]
             | contextShow(
-              (tag = displayOpt.ctx.tag),
-              (sep = displayOpt.ctx.tag ? " " : "")
+              (showTag = displayOpt.ctx.tag),
+              (defaultAttr = defaultAttr),
+              (sep = displayOpt.token_sep ? " ": "")
             )
         }}</span>
         <span class="key" v-bind:style="{ width: kwicStyKeyWidth + '%' }">{{
           item["keyword"]
             | contextShow(
-              (tag = displayOpt.kw.tag),
-              (sep = displayOpt.kw.tag ? " " : "")
+              (showTag = displayOpt.kw.tag),
+              (defaultAttr = defaultAttr),
+              (sep = displayOpt.token_sep ? " ": "")
             )
         }}</span>
         <span class="right" v-bind:style="{ width: kwicStyCtxWidth + '%' }">{{
           item["right"]
             | contextShow(
-              (tag = displayOpt.ctx.tag),
-              (sep = displayOpt.ctx.tag ? " " : "")
+              (showTag = displayOpt.ctx.tag),
+              (defaultAttr = defaultAttr),
+              (sep = displayOpt.token_sep ? " ": "")
             )
         }}</span>
       </div>
@@ -105,7 +117,6 @@ export default {
         right: 10,
         isLoading: false,
       },
-      port: 1420,
       displayOpt: {
         kw: {
           tag: true,
@@ -115,13 +126,17 @@ export default {
           tag: false,
           sep: " ",
         },
+        token_sep: true,
       },
-      server_error: false,
       results: [],
       showNext: {
         curr: 30,
         next: 30,
       },
+      //// Options related to server ////
+      port: 1420,
+      defaultAttr: null,
+      server_error: false,
       isExporting: false,
       escapeCharacters: [
         ["{", "___LCURLY_BRACKET___"],
@@ -141,6 +156,7 @@ export default {
         ["$", "___END_ANCHOR___"],
         [",", "___COMMA___"],
       ]
+      ///////////////////////////////////
     };
   },
   created () {
@@ -160,7 +176,8 @@ export default {
       this.$http.get(url).then(
         function (data) {
           this.server_error = false;
-          this.results = data.body;
+          this.results = data.body["results"];
+          this.defaultAttr = data.body["default_attr"];
           this.query.isLoading = false;
         },
         (err) => {
@@ -211,11 +228,20 @@ export default {
     },
   },
   filters: {
-    contextShow: function (lst, tag = false, sep = "\t") {
+    contextShow: function (lst, showTag = false, defaultAttr = "word", sep = "\t") {
       const lst2 = [];
       lst.forEach((elem) => {
-        if (tag) lst2.push(Object.values(elem).join("/"));
-        else lst2.push(elem.word);
+        if (showTag) {
+          const firstValue = elem[defaultAttr];
+          var other_values = [];
+          Object.entries(elem).forEach(e => {
+            if (e[0] != defaultAttr)
+              other_values.push(e[1])
+          })
+          const new_values = [firstValue].concat(other_values);
+          lst2.push(new_values.join("/"));
+        }
+        else lst2.push(elem[defaultAttr]);
       });
 
       return lst2.join(sep);
@@ -237,7 +263,7 @@ export default {
   padding: 20px 0;
   height: 100px;
   width: 90%;
-  min-width: 900px;
+  min-width: 800px;
   top: 0;
   background: white;
 }
@@ -250,15 +276,16 @@ export default {
 .keyword {
   display: inline-block;
   height: 70px;
-  width: 64%;
+  width: 60%;
   margin: 0;
   padding: 0;
   text-align: left;
+  vertical-align: top
 }
 .setting {
   display: inline-block;
   height: 80px;
-  width: 36%;
+  width: 40%;
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -290,6 +317,17 @@ button#search {
   padding: 0;
   width: 2.5em;
 }
+.setting input[type="text"] {
+  padding: 0;
+  width: 4.5em;
+  text-align: center;
+}
+.setting .default_attr {
+  background: rgba(158, 158, 158, 0.3);
+  color: rgb(78, 78, 78);
+  padding: 0.2em 0.28em;
+  border-radius: 7%;
+}
 .kwic span {
   display: inline-block;
   width: 40%;
@@ -308,7 +346,7 @@ button#search {
   padding-top: 1.2em;
 }
 .results .kwic:nth-child(2n + 1) {
-  background: rgba(238, 238, 238, 0.931);
+  background: rgba(226, 226, 226, 0.9);
 }
 .results span.key {
   text-align: center;
@@ -342,6 +380,7 @@ button#search {
   margin: 5px 1.2em 5px 0;
   padding: 6px;
   line-height: 0.75em;
+  width: 4.8em;
 }
 .info span.num-of-results {
   width: 15em;
