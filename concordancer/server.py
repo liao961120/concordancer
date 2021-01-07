@@ -96,12 +96,13 @@ class ConcordancerBackend(object):
         print(f"Found {len(self.concord_list)} results...\n")
         ############ _DEBUGGING ##############
         resp.status = falcon.HTTP_200  # This is the default status
-        resp.body = json.dumps(self.concord_list, ensure_ascii=False)
+        resp.body = json.dumps({
+            'results': self.concord_list,
+            'default_attr': self.C._cql_default_attr
+        }, ensure_ascii=False)
 
     def on_get_export(self, req, resp):
-        # Process concordance to tsv
-        resp.body = json.dumps(list(self.concord_list),
-                               ensure_ascii=False, indent="\t")
+        resp.body = json.dumps(self.concord_list, ensure_ascii=False, indent="\t")
 
 
 ########################################
