@@ -1,5 +1,5 @@
 <template>
-  <div @scroll="showMore" class="container">
+  <div class="container">
     <div class="header">
       <div class="query">
         <div class="keyword">
