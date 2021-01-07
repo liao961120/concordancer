@@ -20,6 +20,7 @@ pip install -U concordancer
 import json
 from concordancer.demo import download_demo_corpus
 from concordancer.concordancer import Concordancer
+from concordancer import server
 
 # Load demo corpus
 fp = download_demo_corpus(to="~/Desktop")
@@ -36,7 +37,6 @@ C.set_cql_parameters(default_attr="word", max_quant=3)
 You can start an interactive server to query and read results through your browser:
 
 ```python
-from concordancer import server 
 server.run(C)
 ```
 
