@@ -69,14 +69,13 @@ class ConcordancerBackend(object):
         params['left'] = int(params['left'])
         params['right'] = int(params['right'])
         ############ DEBUGGING ##############
-        print("Recieved request!!!")
+        print("Searching corpus...")
         ############ _DEBUGGING ##############
 
         # Test CQL syntax
         cql = params['query']
         for char, escape in URL_ESCAPES:
             cql = cql.replace(escape, char)
-        print(cql)
         try:
             cqls.parse(cql)
         except:
@@ -94,13 +93,10 @@ class ConcordancerBackend(object):
 
         # Response to frontend
         ############ DEBUGGING ##############
-        print("Sending response...")
+        print(f"Found {len(self.concord_list)} results...\n")
         ############ _DEBUGGING ##############
         resp.status = falcon.HTTP_200  # This is the default status
         resp.body = json.dumps(self.concord_list, ensure_ascii=False)
-        ############ DEBUGGING ##############
-        print("Response sent !!!")
-        ############ _DEBUGGING ##############
 
     def on_get_export(self, req, resp):
         # Process concordance to tsv
