@@ -473,6 +473,8 @@
 
 
     <span class="k">def</span> <span class="nf">_get_corp_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc_idx</span><span class="p">,</span> <span class="n">sent_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tk_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get corpus data by position</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">sent_idx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">corpus</span><span class="p">[</span><span class="n">doc_idx</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">text_key</span><span class="p">]</span>
