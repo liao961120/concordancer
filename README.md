@@ -14,7 +14,47 @@ pip install -U concordancer
 
 ## Usage
 
+[Concordancer](https://github.com/liao961120/concordancer) is defined with this workflow in mind:
+
+![](https://img.yongfu.name/concordancer/workflow.png)
+
+where the user is expected to preprocess one's text data to match the corpus data required by ``concordancer``. Once the preprocess is done, subsequent tasks such as indexing the copus, writing query functions to search the corpus, displaying results in an aligned keyword-in-context format are all done by ``concordancer``. The user could then take the search results (exported as JSON by ``concordancer``) for further uses.
+
+### Input corpus data structure
+
+``concordancer`` requires the corpus to be structured (minimally) as:
+
+```python
+[  # a corpus
+    {       # a text
+        'text': [
+            [<tk>, <tk>, <tk>, ...],   # a sentence in a text
+            [<tk>, <tk>, <tk>, ...],   # another sentence in a text
+            ...
+            [<tk>, <tk>, <tk>, ...]    # the last sentence in a text
+        ]
+    },
+    {...},  # another text                      
+    ...
+]
+```
+
+where `<tk>` is a dictionary representating a token, which may resemble something like:
+
+```python
+{
+    'word': 'hits',
+    'lemma': 'hit',
+    'pos': 'V'
+}
+```
+
+This structure allows the corpus to be saved conveniently as a [newline-delimited JSON](https://jsonlines.org) file (`.jsonl`), where each line of the file corresponds to a single text in the corpus, represented as a JSON object (i.e., a dictionary in Python). You can see an example of the corpus file saved in `.jsonl` [here](https://github.com/liao961120/concordancer/blob/main/example-corpus-data/tokenDict.jsonl). The code below uses a corpus saved in `.jsonl` format for demonstration.
+
+
 ### Loading a corpus from file
+
+The code below uses an [example corpus](https://github.com/liao961120/concordancer/tree/main/test-data), which is saved as a **newline-delimited JSON** file (described in the previous section).
 
 ```python
 import json
@@ -42,7 +82,7 @@ Initializing server...
 Start serving at http://localhost:1420
 ```
 
-![](https://img.yongfu.name/concordancer_query_interface.png)
+![](https://img.yongfu.name/concordancer/query_interface.png)
 
 
 ### CQL Concordance search
