@@ -162,6 +162,109 @@
             
   <div class="section" id="concordancer">
 <h1><span class="section-number">1. </span>Concordancer<a class="headerlink" href="#concordancer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="concordancer.concordancer.Concordancer">
+<em class="property">class </em><code class="sig-prename descclassname">concordancer.concordancer.</code><code class="sig-name descname">Concordancer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">text_key</span><span class="o">=</span><span class="default_value">'text'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/concordancer.html#Concordancer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#concordancer.concordancer.Concordancer" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#concordancer.concordancer.Concordancer.cql_search" title="concordancer.concordancer.Concordancer.cql_search"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cql_search</span></code></a>(cql[, left, right])</p></td>
+<td><p>Search the corpus with Corpus Query Language</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#concordancer.concordancer.Concordancer.set_cql_parameters" title="concordancer.concordancer.Concordancer.set_cql_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_cql_parameters</span></code></a>(default_attr[, max_quant])</p></td>
+<td><p>Set parameters for CQL queries in the Concordancer</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 63%" />
+<col style="width: 37%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>get_corp_data</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="concordancer.concordancer.Concordancer.cql_search">
+<code class="sig-name descname">cql_search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cql</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">left</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">right</span><span class="o">=</span><span class="default_value">5</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/concordancer.html#Concordancer.cql_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#concordancer.concordancer.Concordancer.cql_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search the corpus with Corpus Query Language</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cql</strong><span class="classifier">str</span></dt><dd><p>A CQL query</p>
+</dd>
+<dt><strong>left</strong><span class="classifier">int, optional</span></dt><dd><p>Left context size, by default 5</p>
+</dd>
+<dt><strong>right</strong><span class="classifier">int, optional</span></dt><dd><p>Right context size, by default 5</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><dl>
+<dt>dict</dt><dd><p>A dictionary with the structure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;left&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">tk</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">tk</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="s1">&#39;keyword&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">tk</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">tk</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="s1">&#39;right&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">tk</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">tk</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;doc_idx&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span> 
+        <span class="s1">&#39;sent_idx&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">,</span> 
+        <span class="s1">&#39;tk_idx&#39;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;captureGroups&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;verb&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">tk</span><span class="o">&gt;</span><span class="p">],</span>
+        <span class="s1">&#39;noun&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">tk</span><span class="o">&gt;</span><span class="p">]}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">&lt;tk&gt;</span></code> is a token, represented as a dictionary,
+for instance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;word&#39;</span><span class="p">:</span> <span class="s1">&#39;hits&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;lemma&#39;</span><span class="p">:</span> <span class="s1">&#39;hit&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pos&#39;</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="concordancer.concordancer.Concordancer.set_cql_parameters">
+<code class="sig-name descname">set_cql_parameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">default_attr</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">max_quant</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">6</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/concordancer.html#Concordancer.set_cql_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#concordancer.concordancer.Concordancer.set_cql_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set parameters for CQL queries in the Concordancer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>default_attr</strong><span class="classifier">str</span></dt><dd><p>The default attribute of the tokens. CQL allows expressing
+a token without specifying its attribute, like <code class="docutils literal notranslate"><span class="pre">&quot;hits&quot;</span></code>. 
+If <code class="docutils literal notranslate"><span class="pre">default_attr</span></code> is set to, for example, <code class="docutils literal notranslate"><span class="pre">word</span></code>, 
+<code class="docutils literal notranslate"><span class="pre">&quot;hits&quot;</span></code> is then equivalent to <code class="docutils literal notranslate"><span class="pre">[word=&quot;hits&quot;]</span></code> in CQL.</p>
+</dd>
+<dt><strong>max_quant</strong><span class="classifier">int, optional</span></dt><dd><p>The maximium quantity to evaluate to for the CQL token-level
+quantifier. <code class="docutils literal notranslate"><span class="pre">max_quant</span></code> is used in two CQL expressions: <code class="docutils literal notranslate"><span class="pre">+</span></code>
+and <code class="docutils literal notranslate"><span class="pre">*</span></code>. The upper bounds of these quantifiers are theoretically
+infinite, but since the computer cannot generate a infinite number
+of queries, an upper bound of the quantifier must be specified. 
+By default, it is set to 6.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
