@@ -2,7 +2,7 @@
 
 # Concordancer
 
-This module loads and indexes a corpus in RAM and provides concordance search to retrieve data from the corpus using (a subset of) Corpus Query Language (CQL).
+This library loads and indexes a corpus in RAM and provides concordance search to retrieve data from the corpus with (a subset of) Corpus Query Language (CQL).
 
 
 ## Installation
@@ -37,8 +37,12 @@ C.set_cql_parameters(default_attr="word", max_quant=3)
 You can start an interactive server to query and read results through your browser:
 
 ```python
-server.run(C)
+>>> server.run(C)
+Initializing server...
+Start serving at http://localhost:1420
 ```
+
+![](https://img.yongfu.name/concordancer_query_interface.png)
 
 
 ### CQL Concordance search
@@ -98,7 +102,7 @@ left                        keyword          right             LABEL: verb    LA
 
 ## Supported CQL features
 
-CQL search is supported through [`cqls`](https://github.com/liao961120/cqls), in which a (quite useful) subset of CQL is implemented:
+CQL search is supported through [cqls](https://github.com/liao961120/cqls), which implements a (quite useful) subset of CQL:
 
 - token: `[]`, `"我"`, `[word="我"]`, `[word!="我" & pos="N.*"]`
 - token-level quantifier: `+`, `*`, `?`, `{n,m}`

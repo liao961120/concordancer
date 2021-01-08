@@ -3,7 +3,22 @@ from tabulate import tabulate
 from typing import Union, Sequence, Generator
 
 class KWIC:
+    """Printing concordance data in keyword-in-context format
+    """
+
     def __init__(self, concordance:Union[Sequence, Generator], print_idx:Sequence[int]=range(10)):
+        """Initialize a concordance list as KWIC and print it out
+
+        Parameters
+        ----------
+        attrs : list, optional
+            The attributes of a token to include in printing, 
+            by default ['word', 'pos']
+        print_idx : Sequence[int], optional
+            Indicies of the instances of the concordance list 
+            to print out, by default None. If None, all instances 
+            are printed out.
+        """
         self.data = concordance
         self.print_keys = ['left', 'keyword', 'right', 'captureGroups']
         self.captureGroup_keys = set()

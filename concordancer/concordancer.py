@@ -14,19 +14,79 @@ class Concordancer(IndexedCorpus):
     _cql_max_quantity = 6
 
     def cql_search(self, cql: str, left=5, right=5):
+        """Search the corpus with Corpus Query Language
+
+        Parameters
+        ----------
+        cql : str
+            A CQL query
+        left : int, optional
+            Left context size, by default 5
+        right : int, optional
+            Right context size, by default 5
+
+        Yields
+        -------
+        dict
+            A dictionary with the structure:
+
+            .. code-block:: python
+
+                {
+                    'left': [<tk>, <tk>, ...],
+                    'keyword': [<tk>, <tk>, ...],
+                    'right': [<tk>, <tk>, ...],
+                    'position': {
+                        'doc_idx': <int>, 
+                        'sent_idx': <int>, 
+                        'tk_idx': <int>
+                    },
+                    'captureGroups': {
+                        'verb': [<tk>],
+                        'noun': [<tk>]}
+                }
+            
+            where ``<tk>`` is a token, represented as a dictionary,
+            for instance: 
+
+            .. code-block:: python
+
+                {
+                    'word': 'hits', 
+                    'lemma': 'hit',
+                    'pos': 'V',
+                }
+        """
         queries = cqls.parse(cql, default_attr=self._cql_default_attr,max_quant=self._cql_max_quantity)
 
         for query in queries:
-            for result in self.kwic(keywords=query, left=left, right=right):
+            for result in self._kwic(keywords=query, left=left, right=right):
                 yield result
 
 
-    def set_cql_parameters(self, default_attr: str, max_quant: int):
+    def set_cql_parameters(self, default_attr: str, max_quant: int=6):
+        """Set parameters for CQL queries in the Concordancer
+
+        Parameters
+        ----------
+        default_attr : str
+            The default attribute of the tokens. CQL allows expressing
+            a token without specifying its attribute, like ``"hits"``. 
+            If ``default_attr`` is set to, for example, ``word``, 
+            ``"hits"`` is then equivalent to ``[word="hits"]`` in CQL.
+        max_quant : int, optional
+            The maximium quantity to evaluate to for the CQL token-level
+            quantifier. ``max_quant`` is used in certain CQL expressions:
+            ``+``, ``*``, and ``{<int>,}``. These quantifiers are 
+            theoretically infinite, but since the computer cannot generate
+            a infinite number of queries, an upper bound of the quantifier
+            must be specified. By default, it is set to 6.
+        """
         self._cql_default_attr = default_attr
         self._cql_max_quantity = max_quant
 
 
-    def kwic(self, keywords: list, left=5, right=5):
+    def _kwic(self, keywords: list, left=5, right=5):
         # Get concordance from corpus
         search_results = self._search_keywords(keywords)
         if search_results is None: 
@@ -38,7 +98,7 @@ class Concordancer(IndexedCorpus):
         
     def _kwic_single(self, doc_idx, sent_idx, tk_idx, tk_len=1, left=5, right=5, keywords:list=None):
         # Flatten doc sentences to a list of tokens
-        text, keyword_idx = flatten_doc_to_sent(self.get_corp_data(doc_idx))
+        text, keyword_idx = flatten_doc_to_sent(self._get_corp_data(doc_idx))
 
         tk_start_idx = keyword_idx(sent_idx, tk_idx)
         tk_end_idx = tk_start_idx + tk_len
@@ -52,7 +112,7 @@ class Concordancer(IndexedCorpus):
                 for lab in keyword.get('__label__'):
                     if lab not in captureGroups:
                         captureGroups[lab] = []
-                    tk = self.get_corp_data(doc_idx, sent_idx, i + tk_idx)
+                    tk = self._get_corp_data(doc_idx, sent_idx, i + tk_idx)
                     captureGroups[lab].append(tk)
 
         return {
@@ -150,7 +210,7 @@ class Concordancer(IndexedCorpus):
             matching_idicies = Counter()
             for tag, values in keyword['match'].items():
                 # Check all values of a specific tag
-                for idx in self.intersect_search(tag, values):
+                for idx in self._intersect_search(tag, values):
                     matching_idicies.update({idx: 1})
             
             # Get indicies that matched all given tags 
@@ -166,7 +226,7 @@ class Concordancer(IndexedCorpus):
             ##########   NEGATIVE MATCH   ##########
             ########################################
             for tag, values in keyword['not_match'].items():
-                for idx in self.union_search(tag, values):
+                for idx in self._union_search(tag, values):
                     negative_match.add(idx)
 
             ########################################
@@ -180,7 +240,7 @@ class Concordancer(IndexedCorpus):
         return positive_match
 
 
-    def union_search(self, tag:Union[str, int], values:list):
+    def _union_search(self, tag:Union[str, int], values:list):
         """Given candidates values, return from corpus the position 
         of tokens matching any of the values
 
@@ -208,7 +268,7 @@ class Concordancer(IndexedCorpus):
         return matched_indicies
 
 
-    def intersect_search(self, tag:Union[str, int], values:list):
+    def _intersect_search(self, tag:Union[str, int], values:list):
         """Given candidates values, return from corpus the position 
         of tokens matching all values
 
@@ -246,15 +306,14 @@ class Concordancer(IndexedCorpus):
 
 
     def _get_keywords(self, search_anchor: dict, doc_idx, sent_idx, tk_idx):
-        
-        sent = self.get_corp_data(doc_idx, sent_idx)
+        sent = self._get_corp_data(doc_idx, sent_idx)
         start_idx = max(0, tk_idx - search_anchor['seed_idx'])
         end_idx = min(start_idx + search_anchor['length'], len(sent))
         
         return sent[start_idx:end_idx]
 
 
-    def get_corp_data(self, doc_idx, sent_idx=None, tk_idx=None):
+    def _get_corp_data(self, doc_idx, sent_idx=None, tk_idx=None):
         if self.text_key is not None:
             if sent_idx is None:
                 return self.corpus[doc_idx][self.text_key]
@@ -306,19 +365,3 @@ def is_subdict(subdict:dict, dict_:dict, regex=False):
         else:
             if not re.search(subdict[k], dict_[k]): return False
     return True
-
-
-#############
-# Test
-#############
-if __name__ == "__main__":
-    import json
-    corpus = []
-    with open("test-data/tokenDict.jsonl") as f:
-        for l in f:
-            corpus.append(json.loads(l))
-
-    C = Concordancer(corpus)
-    concord_list = C.kwic("我.", left=2, right=2, regex=True)
-    #concord_list.data
-# %%

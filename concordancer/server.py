@@ -32,6 +32,21 @@ URL_ESCAPES = [
 
 
 def run(Concordancer, port=1420, url=None, open_browser=True):
+    """Serve the concordancer object to allow searching with the web browser
+
+    Parameters
+    ----------
+    Concordancer : Concordancer
+        A concordancer object
+    port : int, optional
+        The port the server listens on, by default 1420
+    url : str, optional
+        Custom path to the query interface, by default None, 
+        which uses the path to local query interface bundled
+        with the library
+    open_browser : bool, optional
+        Automatically visit the url with the browser, by default True
+    """
     # Allow access from frontend
     cors = CORS(allow_all_origins=True)
 
@@ -52,12 +67,47 @@ def run(Concordancer, port=1420, url=None, open_browser=True):
 
 
 class ConcordancerBackend(object):
+    """Falcon API to serve the concordancer object for the query interface
+
+    Notes
+    -----
+    Two API endpoints, ``/query`` and ``/export``, are exposed. The endpoint 
+    ``/export`` accepts a GET request and responds by sending the most recent
+    queried results back to the front-end in JSON format. The data sent back 
+    are identical to the data returned by 
+    :func:`~concordancer.Concordancer.cql_search` (converted to JSON).
+    For the endpoint ``/query``, see the doc in 
+    :func:`~server.ConcordancerBackend.on_get`
+    """
     def __init__(self, Concordancer):
         # Initialize corpus
         self.C = Concordancer
         self.concord_list = []
 
     def on_get(self, req, resp):
+        """Handling GET requests sent to ``/query``
+
+        Parameters
+        ----------
+        req : falcon.request
+            Refer to falcon's documentation
+        resp : falcon.response
+            Refer to falcon's documentation
+        
+        Notes
+        -----
+        Three parameters, ``query``, ``left``, and ``right`` are required
+        in the query string of the URL sent to this endpoint. ``query``
+        holds the CQL query entered by the user. ``left`` and ``right`` set
+        the left and right context sizes of the returned concordance lines.
+
+        Due to the conflicts between CQL metacharacters and URL specification,
+        some characters are replaced with safe ones in the front-end and
+        converted back to the original ones in the back-end. For the full set
+        of characters converted, refer to `URL_ESCAPES`_.
+
+        .. _URL_ESCAPES: https://github.com/liao961120/concordancer/blob/acd64e6c572e229fe4633d3a415ce1ac45a5b5be/kwic/src/components/kwic.vue#L141-L158
+        """
         params = {
             'query': '',
             'left': '10',
@@ -72,10 +122,11 @@ class ConcordancerBackend(object):
         print("Searching corpus...")
         ############ _DEBUGGING ##############
 
-        # Test CQL syntax
+        # Restore escaped characters in URL back to original forms
         cql = params['query']
         for char, escape in URL_ESCAPES:
             cql = cql.replace(escape, char)
+        # Test CQL syntax
         try:
             cqls.parse(cql)
         except:
@@ -102,6 +153,19 @@ class ConcordancerBackend(object):
         }, ensure_ascii=False)
 
     def on_get_export(self, req, resp):
+        """Handling GET requests sent to ``/export``
+
+        Parameters
+        ----------
+        req : falcon.request
+            Refer to falcon's documentation
+        resp : falcon.response
+            Refer to falcon's documentation
+        
+        Notes
+        -----
+        Sends the most recent queried results back to the front-end in JSON
+        """
         resp.body = json.dumps(self.concord_list, ensure_ascii=False, indent="\t")
 
 
@@ -109,19 +173,20 @@ class ConcordancerBackend(object):
 ##### Code for front-end interface #####
 ########################################
 def download_query_interface(url=None, force=True):
-    """Download and extract front-end interface for query
+    """Download and extract query interface from web
 
     Parameters
     ----------
-    url : str
+    url : str, optional
         URL of the ``dist.zip`` file containing the
-        front-end interface for querying
+        query interface. By default None, which uses
+        the default URL specified by the library
     force : bool, optional
-        Force download, by default False
+        Force download, by default True
     """
     fp = query_interface_path()
     if os.path.exists(fp):
-        logging.info(f"frontend interface already exists in {fp}")
+        logging.info(f"query interface already exists in {fp}")
         if not force:
             return
 
@@ -143,5 +208,12 @@ def download_query_interface(url=None, force=True):
 
 
 def query_interface_path():
+    """Get the local path to the query interface
+
+    Returns
+    -------
+    str
+        Path to the query interface
+    """
     import concordancer.server
     return str(pathlib.Path(concordancer.server.__file__).parents[0] / "dist/index.html")

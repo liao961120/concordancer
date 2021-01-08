@@ -17,7 +17,11 @@ def download_demo_corpus(to:str='.'):
     Returns
     -------
     str
-        File path to the corpus file (``demo_corpus.jsonl``)
+        File path to the corpus file ``demo_corpus.jsonl``
+    
+    Notes
+    -----
+    Demo data `download link <https://raw.githubusercontent.com/liao961120/concordancer/main/test-data/demo_corpus.jsonl.zip>`_
     """
     fp = DEMO_DATA.split('/')[-1]
     tgt_dir = pathlib.Path(to).expanduser()
