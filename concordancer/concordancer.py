@@ -314,6 +314,8 @@ class Concordancer(IndexedCorpus):
 
 
     def _get_corp_data(self, doc_idx, sent_idx=None, tk_idx=None):
+        """Get corpus data by position
+        """
         if self.text_key is not None:
             if sent_idx is None:
                 return self.corpus[doc_idx][self.text_key]
