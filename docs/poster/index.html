@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>index.utf8</title>
+
+<script src="index_files/header-attrs-2.6/header-attrs.js"></script>
+
+
+
+
+
+<!--
+Font-awesome icons ie github or twitter
+-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
+
+<!--
+Google fonts api stuff
+-->
+<link href='https://fonts.googleapis.com/css?family=Palatino' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Rasa' rel='stylesheet'>
+
+<!--
+Here are the required style attributes for css to make this poster work :)
+-->
+<style>
+@page {
+size: 46in 32in;
+margin: 0;
+padding: 0;
+background-color: #ffffff;
+}
+body {
+margin: 0px;
+padding: 0px;
+width: 46in;
+height: 32in;
+text-align: justify;
+font-size: 45px;
+background-color: #FFFFFF;
+color: #000000;
+}
+/* RMarkdown Class Styles */
+/* center align leaflet map,
+from https://stackoverflow.com/questions/52112119/center-leaflet-in-a-rmarkdown-document */
+.html-widget {
+margin: auto;
+position: sticky;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
+.leaflet.html-widget.html-widget-static-bound.leaflet-container.leaflet-touch.leaflet-fade-anim.leaflet-grab.leaflet-touch-drag.leaflet-touch-zoom {
+position: sticky;
+width: 100%;
+}
+pre.sourceCode.r, pre.sourceCode.python {
+background-color: #ffffff20;
+border: solid #4382B4 1mm;
+border-radius: 0.5em;
+padding: 4mm;
+margin: auto;
+margin-top: 1em;
+margin-bottom: 1em;
+/* align-items: center; */
+}
+div.sourceCode {
+background-color: transparent;
+width: 85%;
+margin-left: auto;
+margin-right: auto;
+}
+code.sourceCode.r, code.sourceCode.python {
+background-color: transparent;
+font-size: 20pt;
+border-radius: 2mm;
+}
+code {
+font-size: 25pt;
+font-family: monospace;
+background-color: #4382B424;
+color: #4382B4;
+padding: 1.2mm;
+line-height: 1;
+border-radius: 2mm;
+}
+caption {
+margin-bottom: 10px;
+font-size: 20pt;
+font-style: italic;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #2A5A8320;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+  border-spacing: 0;
+  font-size: 40%;
+  border-style: none;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 1em;
+  padding-left: 1em;
+  line-height: 1em;
+}
+table {
+  margin: auto;
+}
+th {
+  padding-left: 5mm;
+  padding-right: 5mm;
+}
+.caption {
+font-size: 20pt;
+font-style: italic;
+padding-top: 0;
+}
+.references {
+font-size: 20px;
+line-height: 90%;
+}
+/* Create three unequal columns that floats next to each other */
+.column {
+float: left;
+padding: 0px;
+}
+.outer {
+width: 46in;
+height: 32in;
+-webkit-column-count: 2; /* Chrome, Safari, Opera */
+-moz-column-count: 2; /* Firefox */
+column-count: 2;
+-webkit-column-fill: auto;
+-moz-column-fill: auto;
+column-fill: auto;
+-webkit-column-rule-width: 0.5;
+-moz-column-rule-width: 0.5;
+column-rule-width: 0.5;
+-webkit-column-rule-style: solid;
+-moz-column-rule-style: solid;
+column-rule-style: solid;
+-webkit-column-rule-color: black;
+-moz-column-rule-color: black;
+column-rule-color: black;
+-webkit-column-gap: 50%;
+background-color: #ffffff;
+font-family: Rasa;
+color: #000000;
+}
+span.citation {
+  color: #4382B4;
+  font-weight: bold;
+}
+a {
+text-decoration: none;
+color: #4382B4;
+}
+#title {
+font-size: 118px;
+text-align: left;
+margin: 0;
+line-height: 90%;
+border-bottom: 0;
+}
+#author {
+color: #2A5A83;
+margin: 0;
+text-align: left;
+line-height: 65%;
+font-size: 1.17em;
+}
+#affiliation {
+padding-top: 1em;
+color: #00000060;
+font-style: italic;
+font-size: 25px;
+margin: 0;
+}
+sup {
+color: #cc0000;
+}
+.affiliation sup {
+font-size: 20px;
+}
+.author sup {
+font-size: 30px;
+}
+.author_extra {
+color: #4382B4;
+margin: 0;
+line-height: 85%;
+font-size: 35px;
+}
+.outer h1 {
+text-align: center;
+margin-top: 0.5in;
+margin-bottom: 0.5in;
+}
+.outer h2 {
+text-align: center;
+}
+.outer p {
+color: #000000;
+}
+.outer ol {
+text-align: left;
+}
+.main {
+width: calc(46in * 0.5);
+height: 32in;
+position: absolute;
+margin-left: calc(46in * 0.25);
+background-color: #2A5A83;
+color: #FFFFFF90;
+font-family: Palatino;
+background-image: linear-gradient(#2A5A83 50%, #4382B4);
+}
+.main strong {
+color: #FFFFFF;
+}
+img.main-img-left {
+width: 20%;
+left: 0.5in;
+bottom: 0.2in;
+position: absolute;
+}
+img.main-img-right {
+width: 18%;
+right: 0.5in;
+bottom: 0.2in;
+position: absolute;
+}
+.main p {
+padding-top: 20%;
+font-size: 170px;
+text-align: left;
+}
+.fab {
+color: #00000060;
+font-size: 25px;
+}
+.twitter, i {
+color: #00000060;
+font-size: 35px;
+text-decoration: none;
+}
+a.email {
+text-decoration: none;
+color: #00000060;
+font-size: 35px;
+}
+.envelope {
+color: #00000060;
+font-size: 5px;
+text-decoration: none;
+}
+.globe {
+color: #00000060;
+font-size: 5px;
+text-decoration: none;
+}
+.github > .fab {
+color: #00000060;
+font-size: 40px;
+text-decoration: none;
+}
+.globetext {
+color: #00000060;
+font-size: 35px;
+text-decoration: none;
+}
+.poster_wrap {
+width: 46in;
+height: 32in;
+padding: 0cm;
+background-color: #ffffff;
+}
+span > #tab:mytable {
+  font-weight: bold;
+}
+.section {
+  padding-left: 10mm;
+  padding-right: 10mm;
+}
+.main p {
+  padding-left: 30mm;
+  padding-right: 30mm;
+}
+.main_pic {
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.orcid img {
+  width: 3%;
+}
+</style>
+</head>
+<body>
+
+
+<div class="poster_wrap">
+<div class="column outer">
+<br>
+<div class="title section">
+<h1 id="title"><div class="line-block">A Python Library for<br />
+Concordance Search<br />
+with CQL</div></h1>
+<br>
+<h3 id="author" class="author">
+
+Yongfu Liao<sup> </sup><br>
+
+<a class='envelope'><i class="fas fa-envelope"></i></a> <a href="mailto:liao961120@gmail.com" class="email">liao961120@gmail.com</a> <br>
+<a class='github'><i class="fab fa-github"></i></a><a class='globetext' href="https://github.com/liao961120"> &nbsp;@liao961120</a>
+</h3>
+
+<h5 id="author_extra" class="author_extra">
+</h5>
+
+<p id="affiliation" class="affiliation">
+<sup></sup> Graduate Institute of Linguistics, National Taiwan University
+</p>
+
+</div>
+<style>
+.main .py-yellow strong {
+  color:#FFD846;!important
+}
+.main p {
+  padding-top: 10%;
+}
+#affiliation {
+  font-size: 0.82em;
+  font-style: normal;
+}
+.fa-envelope {
+  margin-top: 15px;
+}
+#refs > div > p {
+  text-align: left;
+  font-size: 1.5em;
+  line-height: 1.1em;
+}
+</style>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+</div>
+<div id="usage" class="section level1">
+<h1>Usage</h1>
+<ol style="list-style-type: decimal">
+<li>Process raw data to match the <strong>required input structure</strong></li>
+<li>Search the corpus with <strong>Corpus Query Language (CQL)</strong></li>
+<li>Do anything you want with <strong>search results</strong><br />
+(convert to csv, analyze, annotate, etc.)</li>
+</ol>
+<div class="figure" style="text-align: center"><span id="fig:irisfigure"></span>
+<img src="https://img.yongfu.name/concordancer/workflow.png" alt="The workflow of using *concordancer*" width="100%" />
+<p class="caption">
+Figure 1: The workflow of using <em>concordancer</em>
+</p>
+</div>
+</div>
+<div id="corpus-query-language" class="section level1">
+<h1>Corpus Query Language</h1>
+<p>See <span class="citation">(Evert <a href="#ref-evert2009" role="doc-biblioref">2009</a>)</span></p>
+</div>
+<div id="implementation" class="section level1">
+<h1>Implementation</h1>
+<ol style="list-style-type: decimal">
+<li>CQL Interpreter</li>
+<li>Corpus Indexing</li>
+<li>Search Functions</li>
+<li>Front-end Application</li>
+</ol>
+<p>How about a neat table of data? See, Table <a href="#tab:iristable">1</a>:</p>
+<table>
+<caption>
+<span id="tab:iristable">Table 1: </span>A table made with the <strong>knitr::kable</strong> function.
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Sepal <br> Length
+</th>
+<th style="text-align:center;">
+Sepal <br> Width
+</th>
+<th style="text-align:center;">
+Petal <br> Length
+</th>
+<th style="text-align:center;">
+Petal <br> Width
+</th>
+<th style="text-align:center;">
+Species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+5.1
+</td>
+<td style="text-align:center;">
+3.5
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.9
+</td>
+<td style="text-align:center;">
+3.0
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.7
+</td>
+<td style="text-align:center;">
+3.2
+</td>
+<td style="text-align:center;">
+1.3
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.6
+</td>
+<td style="text-align:center;">
+3.1
+</td>
+<td style="text-align:center;">
+1.5
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.0
+</td>
+<td style="text-align:center;">
+3.6
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.4
+</td>
+<td style="text-align:center;">
+3.9
+</td>
+<td style="text-align:center;">
+1.7
+</td>
+<td style="text-align:center;">
+0.4
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4.6
+</td>
+<td style="text-align:center;">
+3.4
+</td>
+<td style="text-align:center;">
+1.4
+</td>
+<td style="text-align:center;">
+0.3
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5.0
+</td>
+<td style="text-align:center;">
+3.4
+</td>
+<td style="text-align:center;">
+1.5
+</td>
+<td style="text-align:center;">
+0.2
+</td>
+<td style="text-align:center;">
+setosa
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references hanging-indent">
+<div id="ref-callanan2020">
+<p>Callanan, David. 2020. “Simple Math Interpreter in Python.” <a href="https://www.youtube.com/playlist?list=PLZQftyCk7_Sdu5BFaXB_jLeJ9C78si5_3">https://www.youtube.com/playlist?list=PLZQftyCk7_Sdu5BFaXB_jLeJ9C78si5_3</a>.</p>
+</div>
+<div id="ref-evert2009">
+<p>Evert, Stefan. 2009. “The CQP Query Language Tutorial.” <a href="http://cwb.sourceforge.net/temp/CQPTutorial.pdf">http://cwb.sourceforge.net/temp/CQPTutorial.pdf</a>.</p>
+</div>
+<div id="ref-honghantang2020">
+<p>洪漢唐, and 江琼玉. 2020. “小農手作： 語料庫索引與建置.” <a href="https://docs.google.com/presentation/d/1c_xfgZI5YUCJSanj7l_E9O_0MYGOlZD1vqFSuv6Rp0I">https://docs.google.com/presentation/d/1c_xfgZI5YUCJSanj7l_E9O_0MYGOlZD1vqFSuv6Rp0I</a>.</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="main">
+<p>Turn <strong>text data</strong> into a <span class="py-yellow"><strong>Searchable Corpus</strong></span> with <br/><strong>5 lines</strong> of code in <span class="py-yellow"><strong>Python</strong></span><br><br> <img src="https://img.yongfu.name/concordancer/query_interface.png" class="main_pic" /></p>
+<img src="https://img.yongfu.name/concordancer/QR_code.png" class="main-img-left" />
+<img src="https://img.yongfu.name/affiliations/GIL.png" class="main-img-right" />
+</div>
+</div>
+
+
+
+</body>
+</html>

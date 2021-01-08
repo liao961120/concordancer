@@ -1,0 +1,117 @@
+---
+title: |
+  | A Python Library for   
+  | Concordance Search   
+  | with CQL
+author:
+  - name: Yongfu Liao
+    #affil: 1
+    github: liao961120
+    email: liao961120@gmail.com
+    main: true
+affiliation:
+  - address: Graduate Institute of Linguistics, National Taiwan University
+    #num: 1
+main_findings:
+  - "Turn **text data** into a [**Searchable Corpus**]{.py-yellow} with <br/>**5 lines** of code in [**Python**]{.py-yellow}"
+  - '![](https://img.yongfu.name/concordancer/query_interface.png){.main_pic}'
+logoleft_name: '![](https://img.yongfu.name/concordancer/QR_code.png){.main-img-left}'
+logoright_name: '![](https://img.yongfu.name/affiliations/GIL.png){.main-img-right}'
+main_picwidth: "100%"
+main_fontfamily: "Palatino"  #Palatino #Alegreya
+#main_textsize: "170px"
+title_textsize: "118px" #125px
+primary_colour: "#2A5A83" # "#AF785F"  #"#795548"
+secondary_colour: "#4382B4"
+output: 
+  posterdown::posterdown_betterland:
+    self_contained: false
+    pandoc_args: --mathjax
+    highlight: haddock
+    number_sections: false
+link-citations: true
+bibliography: concordaner.bib
+nocite: | 
+  @honghantang2020, @callanan2020
+---
+
+
+<style>
+.main .py-yellow strong {
+  color:#FFD846;!important
+}
+.main p {
+  padding-top: 10%;
+}
+#affiliation {
+  font-size: 0.82em;
+  font-style: normal;
+}
+.fa-envelope {
+  margin-top: 15px;
+}
+#refs > div > p {
+  text-align: left;
+  font-size: 1.5em;
+  line-height: 1.1em;
+}
+</style>
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(results = 'asis',
+                      echo = FALSE,
+                      warning = FALSE,
+                      tidy = FALSE,
+                      message = FALSE,
+                      fig.align = 'center',
+                      out.width = "100%",
+                      cache = T)
+options(knitr.table.format = "html") 
+```
+
+```{r myplot, include=FALSE}
+svg('myplot.svg')
+plot(iris$Sepal.Length, iris$Sepal.Width)
+dev.off()
+```
+
+# Introduction
+
+# Usage
+
+1. Process raw data to match the **required input structure**
+2. Search the corpus with **Corpus Query Language (CQL)**
+3. Do anything you want with **search results**   
+(convert to csv, analyze, annotate, etc.)
+
+```{r, irisfigure, fig.cap='The workflow of using *concordancer*', out.width="100%"}
+knitr::include_graphics('https://img.yongfu.name/concordancer/workflow.png')
+```
+
+
+# Corpus Query Language 
+
+See [@evert2009]
+
+# Implementation
+
+1. CQL Interpreter
+2. Corpus Indexing
+3. Search Functions
+4. Front-end Application
+
+How about a neat table of data? See, Table \@ref(tab:iristable):
+
+```{r, iristable}
+knitr::kable(
+  iris[1:8,1:5], format = "html",
+  caption = "A table made with the **knitr::kable** function.",
+  align = "c", col.names = c("Sepal <br> Length",
+                             "Sepal <br> Width",
+                             "Petal <br> Length",
+                             "Petal <br> Width",
+                             "Species"),
+  escape = FALSE)
+```
+
+# References
