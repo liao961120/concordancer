@@ -18,7 +18,7 @@ pip install -U concordancer
 
 ![](https://img.yongfu.name/concordancer/workflow.png)
 
-where the user is expected to preprocess one's text data to match the corpus data required by ``concordancer``. Once the preprocess is done, subsequent tasks such as indexing the copus, writing query functions to search the corpus, displaying results in an aligned keyword-in-context format are all done by ``concordancer``. The user could then take the search results (exported as JSON by ``concordancer``) for further uses.
+The user is expected to preprocess the text data to match the corpus data required by ``concordancer``. Once this is done, subsequent tasks such as indexing the copus, writing query functions to search the corpus, and displaying results in an aligned keyword-in-context format are all done by ``concordancer``. The user could then further process the search results (exported as JSON by ``concordancer``) for other uses.
 
 ### Input corpus data structure
 
