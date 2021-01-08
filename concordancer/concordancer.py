@@ -77,9 +77,9 @@ class Concordancer(IndexedCorpus):
         max_quant : int, optional
             The maximium quantity to evaluate to for the CQL token-level
             quantifier. ``max_quant`` is used in two CQL expressions: ``+``
-            and ``*``. These quantifiers are theoretically infinite, 
-            but since the computer cannot generate a infinite number of
-            queries, an upper bound of the quantifier must be specified. 
+            and ``*``. The upper bounds of these quantifiers are theoretically
+            infinite, but since the computer cannot generate a infinite number
+            of queries, an upper bound of the quantifier must be specified. 
             By default, it is set to 6.
         """
         self._cql_default_attr = default_attr
