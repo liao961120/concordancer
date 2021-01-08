@@ -11,3 +11,4 @@ dist.zip
 !demo_corpus.jsonl.zip
 /kwic/node_modules/.cache
 .vscode
+/docs/build
