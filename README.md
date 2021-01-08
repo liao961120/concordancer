@@ -14,7 +14,7 @@ pip install -U concordancer
 
 ## Usage
 
-[Concordancer](https://github.com/liao961120/concordancer) is defined with this workflow in mind:
+[Concordancer](https://github.com/liao961120/concordancer) is designed with this workflow in mind:
 
 ![](https://img.yongfu.name/concordancer/workflow.png)
 
