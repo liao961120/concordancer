@@ -2,3 +2,4 @@ sphinx
 numpydoc
 sphinx-rtd-theme
 m2r2
+concordancer
