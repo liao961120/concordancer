@@ -93,7 +93,7 @@ The full set of CQL is large and often confuses users who encounter it for the f
 # Program Design
 
 **CQL Interpreter**
-: CQL search is supported through cqls^[https://github.com/liao961120/cqls], a Python library that converts a CQL string into a list of queries represented in JSON (see Fig. \@ref(fig:cqls)).  
+: CQL search is supported through cqls^[https://github.com/liao961120/cqls], a Python library that converts a CQL string into a list of queries represented in JSON (see Fig. \@ref(fig:cqls)).<br>  
 ```{r cqls, fig.cap='A simple CQL interpreter written in Python', out.width="100%"}
 knitr::include_graphics('https://img.yongfu.name/concordancer/cqls.png')
 ```
@@ -102,7 +102,7 @@ knitr::include_graphics('https://img.yongfu.name/concordancer/cqls.png')
 : The corpus is indexed (with Python's *dictionary*) to allow for **efficient searches** [@honghantang2020] in *Concordancer*. A simple search on a corpus of 5 million tokens^[This is about half the size of the Sinica Corpus 4.0] could be done in less than a second.
 
 **Front-end Application**
-: *Concordancer* could be run as a web application, where users can interact with the corpus from a **web browser**^[The front-end app originated from a Vue.js project (https://github.com/liao961120/kwic)] (instead of the command line).
+: *Concordancer* could be run as a web application, where users can interact with the corpus from a **web browser** (instead of the command line).
 
 
 

@@ -362,7 +362,7 @@ Figure 1: The workflow of using <em>Concordancer</em>
 <h1>Program Design</h1>
 <dl>
 <dt><strong>CQL Interpreter</strong></dt>
-<dd>CQL search is supported through cqls<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, a Python library that converts a CQL string into a list of queries represented in JSON (see Fig. <a href="#fig:cqls">2</a>).<br />
+<dd>CQL search is supported through cqls<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, a Python library that converts a CQL string into a list of queries represented in JSON (see Fig. <a href="#fig:cqls">2</a>).<br><br />
 
 <div class="figure" style="text-align: center"><span id="fig:cqls"></span>
 <img src="https://img.yongfu.name/concordancer/cqls.png" alt="A simple CQL interpreter written in Python" width="100%" />
@@ -375,7 +375,7 @@ Figure 2: A simple CQL interpreter written in Python
 <dd>The corpus is indexed (with Python’s <em>dictionary</em>) to allow for <strong>efficient searches</strong> <span class="citation">[<a href="#ref-honghantang2020" role="doc-biblioref">3</a>]</span> in <em>Concordancer</em>. A simple search on a corpus of 5 million tokens<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> could be done in less than a second.
 </dd>
 <dt><strong>Front-end Application</strong></dt>
-<dd><em>Concordancer</em> could be run as a web application, where users can interact with the corpus from a <strong>web browser</strong><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> (instead of the command line).
+<dd><em>Concordancer</em> could be run as a web application, where users can interact with the corpus from a <strong>web browser</strong> (instead of the command line).
 </dd>
 </dl>
 </div>
@@ -402,7 +402,6 @@ Figure 2: A simple CQL interpreter written in Python
 <li id="fn1"><p>Refer to the library’s doc: <a href="https://yongfu.name/concordancer" class="uri">https://yongfu.name/concordancer</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p><a href="https://github.com/liao961120/cqls" class="uri">https://github.com/liao961120/cqls</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>This is about half the size of the Sinica Corpus 4.0<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>The front-end app originated from a Vue.js project (<a href="https://github.com/liao961120/kwic" class="uri">https://github.com/liao961120/kwic</a>)<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
