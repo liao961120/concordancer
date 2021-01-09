@@ -14,7 +14,7 @@ affiliation:
   - address: Graduate Institute of Linguistics, National Taiwan University
     #num: 1
 main_findings:
-  - "Turn **text data** into a [**Searchable Corpus**]{.py-yellow} <br/> in <br/>**5 lines** of [**Python**]{.py-yellow}<br>![](https://img.yongfu.name/concordancer/query_interface2.png){.main_pic}"
+  - "Turn **text data** into a [**Searchable Corpus**]{.py-yellow} <br/> in <br/>**five lines** of [**Python**]{.py-yellow}<br>![](https://img.yongfu.name/concordancer/query_interface2.png){.main_pic}"
 logoleft_name: '![](https://img.yongfu.name/concordancer/QR_code.png){.main-img-left}'
 logoright_name: '![](https://img.yongfu.name/affiliations/GIL.png){.main-img-right}'
 main_picwidth: "100%"
