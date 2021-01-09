@@ -79,7 +79,7 @@ Basically, you just need to...
 (convert to csv, analyze, annotate, etc.)
 
 
-```{r, workflow, fig.cap='The workflow of using *Concordancer*', out.width="100%"}
+```{r, workflow, fig.cap='The workflow for using *Concordancer*', out.width="100%"}
 knitr::include_graphics('https://img.yongfu.name/concordancer/workflow.png')
 ```
 
