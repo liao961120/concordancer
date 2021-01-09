@@ -25,7 +25,7 @@ Font-awesome icons ie github or twitter
 <!--
 Google fonts api stuff
 -->
-<link href='https://fonts.googleapis.com/css?family=Palatino' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Special Elite' rel='stylesheet'>
 <link href='https://fonts.googleapis.com/css?family=Rasa' rel='stylesheet'>
 
 <!--
@@ -33,7 +33,7 @@ Here are the required style attributes for css to make this poster work :)
 -->
 <style>
 @page {
-size: 32in 23in;
+size: 33.1in 23.3in;
 margin: 0;
 padding: 0;
 background-color: #ffffff;
@@ -41,8 +41,8 @@ background-color: #ffffff;
 body {
 margin: 0px;
 padding: 0px;
-width: 32in;
-height: 23in;
+width: 33.1in;
+height: 23.3in;
 text-align: justify;
 font-size: 25.35pt;
 background-color: #FFFFFF;
@@ -63,7 +63,7 @@ width: 100%;
 }
 pre.sourceCode.r, pre.sourceCode.python {
 background-color: #ffffff20;
-border: solid #4382B4 1mm;
+border: solid #569bd1 1mm;
 border-radius: 0.5em;
 padding: 4mm;
 margin: auto;
@@ -85,8 +85,8 @@ border-radius: 2mm;
 code {
 font-size: 25pt;
 font-family: monospace;
-background-color: #4382B424;
-color: #4382B4;
+background-color: #569bd124;
+color: #569bd1;
 padding: 1.2mm;
 line-height: 1;
 border-radius: 2mm;
@@ -132,8 +132,8 @@ float: left;
 padding: 0px;
 }
 .outer {
-width: 32in;
-height: 23in;
+width: 33.1in;
+height: 23.3in;
 -webkit-column-count: 2; /* Chrome, Safari, Opera */
 -moz-column-count: 2; /* Firefox */
 column-count: 2;
@@ -155,12 +155,12 @@ font-family: Rasa;
 color: #000000;
 }
 span.citation {
-  color: #4382B4;
+  color: #569bd1;
   font-weight: bold;
 }
 a {
 text-decoration: none;
-color: #4382B4;
+color: #569bd1;
 }
 #title {
 font-size: 2.525em;
@@ -193,7 +193,7 @@ font-size: 20px;
 font-size: 30px;
 }
 .author_extra {
-color: #4382B4;
+color: #569bd1;
 margin: 0;
 line-height: 85%;
 font-size: 0.9em;
@@ -213,14 +213,14 @@ color: #000000;
 text-align: left;
 }
 .main {
-width: calc(32in * 0.5);
-height: 23in;
+width: calc(33.1in * 0.5);
+height: 23.3in;
 position: absolute;
-margin-left: calc(32in * 0.25);
+margin-left: calc(33.1in * 0.25);
 background-color: #2A5A83;
 color: #FFFFFF90;
-font-family: Palatino;
-background-image: linear-gradient(#2A5A83 50%, #4382B4);
+font-family: Special Elite;
+background-image: linear-gradient(#2A5A83 50%, #569bd1);
 }
 .main strong {
 color: #FFFFFF;
@@ -239,7 +239,7 @@ position: absolute;
 }
 .main p {
 padding-top: 20%;
-font-size: 4em;
+font-size: 4.5em;
 text-align: left;
 }
 .fab {
@@ -277,8 +277,8 @@ font-size: 35px;
 text-decoration: none;
 }
 .poster_wrap {
-width: 32in;
-height: 23in;
+width: 33.1in;
+height: 23.3in;
 padding: 0cm;
 background-color: #ffffff;
 }
@@ -335,46 +335,47 @@ Yongfu Liao<sup> </sup><br>
 <p><link rel="stylesheet" href="custom.css"></p>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p><em>Concordancer</em> is a Python (≥3.7) library for corpus building and search. It aims at <strong>alleviating the pain of building and searching corpora from self-collected text data</strong>. Most existing corpus systems (BNC, COCA, ASBC, etc.) provide search interfaces through the web and could be searched with a <em>powerful query language</em> designed for locating complex linguistic patterns. Though powerful, these systems become useless when a researcher wants to use her <em>own data</em> for research. Limited by the programing skills she has, she could not locate the <em>linguitic pattern</em> necessary for her study. <em>Concordancer</em> is here to fill the gap by providing a useful subset of the mighty <strong>Corpus Query Language</strong> (<strong>CQL</strong>) <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span>. Furthermore, it is <strong>fast</strong>: simple searches<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> on a large corpus (5 million tokens) could be done in less than <em>a second</em> !</p>
+<p><em>Concordancer</em> is a Python (≥3.7) library for corpus building and search. It aims at <strong>alleviating the pain of building and searching corpora from self-collected text data</strong>. Most existing large corpora (BNC, COCA, ASBC, etc.) provide web-based search interfaces and support searching with <em>powerful query languages</em> designed for locating complex linguistic patterns in a corpus. Though powerful, these corpora become useless when a researcher wants to use her <em>own data</em> for research. Limited by her programing skills, she may not be able to retrieve the necessary data from the corpus for a study. <em>Concordancer</em> is here to fill this gap by providing a useful subset of the mighty <strong>Corpus Query Language</strong> (<strong>CQL</strong>) <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span>. Furthermore, concordance search with <em>Concordancer</em> is <strong>fast</strong>: simple searches on a large corpus (5 million tokens) could be done in less than <em>a second</em> !</p>
 </div>
 <div id="usage" class="section level1">
 <h1>Usage</h1>
+<p>Basically, you just need to…</p>
 <ol style="list-style-type: decimal">
-<li>Process raw data into the <strong>required input format</strong><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></li>
+<li>Process raw data into the <strong>required input format</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></li>
 <li>Search the corpus with <strong>Corpus Query Language</strong></li>
 <li>Do anything you want with the <strong>search results</strong><br />
 (convert to csv, analyze, annotate, etc.)</li>
 </ol>
 <div class="figure" style="text-align: center"><span id="fig:workflow"></span>
-<img src="https://img.yongfu.name/concordancer/workflow.png" alt="The workflow of using *concordancer*" width="100%" />
+<img src="https://img.yongfu.name/concordancer/workflow.png" alt="The workflow of using *Concordancer*" width="100%" />
 <p class="caption">
-Figure 1: The workflow of using <em>concordancer</em>
+Figure 1: The workflow of using <em>Concordancer</em>
 </p>
 </div>
 </div>
 <div id="corpus-query-language" class="section level1">
-<h1>Corpus Query Language</h1>
-<p>Corpus Query Language (<strong>CQL</strong>) <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span> is a powerful query language designed for searching linguistic corpora used by many corpus systems such as BNCweb and Sketch Engine.</p>
-<p>The full set of CQL is powerful, but may be confusing for users encountering it for the first time. A great place to start is to refer to the documentation of CQL provided by BlackLab <span class="citation">[<a href="#ref-blacklab" role="doc-biblioref">2</a>]</span>.</p>
+<h1><br> Corpus Query Language</h1>
+<p>Corpus Query Language (<strong>CQL</strong>) <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span> is a powerful query language designed for searching linguistic corpora and is used by many corpus systems such as the BNCweb and the Sketch Engine.</p>
+<p>The full set of CQL is large and often confuses users who encounter it for the first time. A great place to start learning CQL is the documentation of CQL provided by BlackLab <span class="citation">[<a href="#ref-blacklab" role="doc-biblioref">2</a>]</span>. A more complete tutorial on CQL can be found in <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span>.</p>
 </div>
 <div id="program-design" class="section level1">
 <h1>Program Design</h1>
 <dl>
 <dt><strong>CQL Interpreter</strong></dt>
-<dd>CQL search is supported through cqls<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, which turns CQL into a list of queries represented in JSON (see Fig. <a href="#fig:cqls">2</a>).<br />
+<dd>CQL search is supported through cqls<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, a Python library that converts a CQL string into a list of queries represented in JSON (see Fig. <a href="#fig:cqls">2</a>).<br />
 
 <div class="figure" style="text-align: center"><span id="fig:cqls"></span>
-<img src="https://img.yongfu.name/concordancer/cqls.png" alt="cqls: a simple CQL interpreter in Python" width="100%" />
+<img src="https://img.yongfu.name/concordancer/cqls.png" alt="A simple CQL interpreter written in Python" width="100%" />
 <p class="caption">
-Figure 2: cqls: a simple CQL interpreter in Python
+Figure 2: A simple CQL interpreter written in Python
 </p>
 </div>
 </dd>
 <dt><strong>Corpus Indexing</strong></dt>
-<dd>The corpus is indexed (with Python’s <em>dictionary</em>) to allow for efficient searches <span class="citation">[<a href="#ref-honghantang2020" role="doc-biblioref">3</a>]</span>. A search on <em>a corpus of 5 million tokens</em><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> could be done in less than a second.
+<dd>The corpus is indexed (with Python’s <em>dictionary</em>) to allow for <strong>efficient searches</strong> <span class="citation">[<a href="#ref-honghantang2020" role="doc-biblioref">3</a>]</span> in <em>Concordancer</em>. A simple search on a corpus of 5 million tokens<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> could be done in less than a second.
 </dd>
 <dt><strong>Front-end Application</strong></dt>
-<dd>The library could be run as a web application, where users can interact with the corpus from a <em>web browser</em><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> (instead of the command line).
+<dd><em>Concordancer</em> could be run as a web application, where users can interact with the corpus from a <strong>web browser</strong><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> (instead of the command line).
 </dd>
 </dl>
 </div>
@@ -398,17 +399,16 @@ Figure 2: cqls: a simple CQL interpreter in Python
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Such as finding exact matches of a sequence of tokens: <br><code>"hit" [pos="N"]</code><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Refer to the library’s doc: <a href="https://yongfu.name/concordancer" class="uri">https://yongfu.name/concordancer</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p><a href="https://github.com/liao961120/cqls" class="uri">https://github.com/liao961120/cqls</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>This is about half the size of the Sinica Corpus 4.0 (<a href="http://asbc.iis.sinica.edu.tw" class="uri">http://asbc.iis.sinica.edu.tw</a>)<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>The front-end app originated from a Vue.js project (<a href="https://github.com/liao961120/kwic" class="uri">https://github.com/liao961120/kwic</a>)<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>Refer to the library’s doc: <a href="https://yongfu.name/concordancer" class="uri">https://yongfu.name/concordancer</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://github.com/liao961120/cqls" class="uri">https://github.com/liao961120/cqls</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>This is about half the size of the Sinica Corpus 4.0<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>The front-end app originated from a Vue.js project (<a href="https://github.com/liao961120/kwic" class="uri">https://github.com/liao961120/kwic</a>)<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
 </div>
 <div class="main">
-<p>Turn <strong>text data</strong> into a <span class="py-yellow"><strong>Searchable Corpus</strong></span> with <br/><strong>5 lines</strong> of <span class="py-yellow"><strong>Python</strong></span><br><br> <img src="https://img.yongfu.name/concordancer/query_interface2.png" class="main_pic" /></p>
+<p>Turn <strong>text data</strong> into a <span class="py-yellow"><strong>Searchable Corpus</strong></span> <br/> in <br/><strong>5 lines</strong> of <span class="py-yellow"><strong>Python</strong></span><br><img src="https://img.yongfu.name/concordancer/query_interface2.png" class="main_pic" /></p>
 <img src="https://img.yongfu.name/concordancer/QR_code.png" class="main-img-left" />
 <img src="https://img.yongfu.name/affiliations/GIL.png" class="main-img-right" />
 </div>

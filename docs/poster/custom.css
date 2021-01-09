@@ -1,8 +1,17 @@
+.main {
+  font-family: Palatino;
+}
 .main .py-yellow strong {
   color:#FFD846;
 }
 .main p {
-  padding-top: 9%;
+  padding-top: 7.5%;
+}
+.main p img {
+  margin-top: 0.6em;
+}
+img.main-img-left {
+  width: 16.65%;
 }
 #affiliation {
   /* font-size: 0.82em; */
@@ -13,15 +22,28 @@
 }
 #refs > div > p {
   text-align: left;
-  /* font-size: 1.5em; */
-  line-height: 1.1em;
+  font-size: 1em;
+  line-height: 1em;
   padding-left: 1.32em ;
   text-indent: -1.32em ;
+}
+.footnotes hr:after {
+  display: block;
+  content: "Footnotes";
+  font-weight: bold;
+  font-size: 1em;
+  margin-left: 0.8em;
+  margin-top: 0.3em;
+  margin-bottom: 0;
+}
+.footnotes ol {
+  margin-top: 0;
+  padding-top: 0;
 }
 .footnotes li p {
   margin: 0;
   padding: 0;
-  font-size: 0.7em;
+  font-size: 0.8em;
   line-height: 0.7em;
 }
 .footnotes li {
@@ -40,8 +62,12 @@
   margin-top: 2em;
 } */
 .footnotes hr {
+  border: 0;
   border-top: 0.5pt solid rgb(190, 190, 190);
+  /* border-top: 0; */
   border-bottom: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 h1 {
   font-size: 1.8em;
