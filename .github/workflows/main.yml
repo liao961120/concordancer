@@ -34,6 +34,7 @@ jobs:
       run: |
         cd docs/
         make html
+        mv poster/index.pdf build/html/
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
