@@ -1,5 +1,6 @@
 ---
 title: |
+  | Concordancer:  
   | A Python Library for   
   | Concordance Search   
   | with CQL
@@ -13,16 +14,24 @@ affiliation:
   - address: Graduate Institute of Linguistics, National Taiwan University
     #num: 1
 main_findings:
-  - "Turn **text data** into a [**Searchable Corpus**]{.py-yellow} with <br/>**5 lines** of code in [**Python**]{.py-yellow}"
-  - '![](https://img.yongfu.name/concordancer/query_interface.png){.main_pic}'
+  - "Turn **text data** into a [**Searchable Corpus**]{.py-yellow} with <br/>**5 lines** of [**Python**]{.py-yellow}"
+  - '![](https://img.yongfu.name/concordancer/query_interface2.png){.main_pic}'
 logoleft_name: '![](https://img.yongfu.name/concordancer/QR_code.png){.main-img-left}'
 logoright_name: '![](https://img.yongfu.name/affiliations/GIL.png){.main-img-right}'
 main_picwidth: "100%"
 main_fontfamily: "Palatino"  #Palatino #Alegreya
-#main_textsize: "170px"
-title_textsize: "118px" #125px
+poster_height: "23in"  # "32in"
+poster_width: "32in"   # "46in"
+main_textsize: "4em"   # "170px"
+title_textsize: "2.525em" #125pt
+body_textsize: "25.35pt" # 1cm  #45px equal 1.19cm
+authorextra_textsize: "0.9em" # "35px"
+affiliation_textsize: "0.85em" # "25px"
+caption_textsize: "0.72em" #"20pt"
+reference_textsize: "0.75em"  #"20px"
 primary_colour: "#2A5A83" # "#AF785F"  #"#795548"
 secondary_colour: "#4382B4"
+
 output: 
   posterdown::posterdown_betterland:
     self_contained: false
@@ -31,31 +40,12 @@ output:
     number_sections: false
 link-citations: true
 bibliography: concordaner.bib
+csl: ieee.csl
 nocite: | 
   @honghantang2020, @callanan2020
 ---
 
-
-<style>
-.main .py-yellow strong {
-  color:#FFD846;!important
-}
-.main p {
-  padding-top: 10%;
-}
-#affiliation {
-  font-size: 0.82em;
-  font-style: normal;
-}
-.fa-envelope {
-  margin-top: 15px;
-}
-#refs > div > p {
-  text-align: left;
-  font-size: 1.5em;
-  line-height: 1.1em;
-}
-</style>
+<link rel="stylesheet" href="custom.css">
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(results = 'asis',
@@ -77,41 +67,47 @@ dev.off()
 
 # Introduction
 
+*Concordancer* is a Python (≥3.7) library for corpus building and search. It aims at **alleviating the pain of building and searching corpora from self-collected text data**. Most existing corpus systems (BNC, COCA, ASBC, etc.) provide search interfaces through the web and could be searched with a *powerful query language* designed for locating complex linguistic patterns. Though powerful, these systems become useless when a researcher wants to use her *own data* for research. Limited by the programing skills she has, she could not locate the *linguitic pattern* necessary for her study. *Concordancer* is here to fill the gap by providing a useful subset of the mighty **Corpus Query Language** (**CQL**) [@evert2009]. Furthermore, it is **fast**: simple searches^[Such as finding exact matches of a sequence of tokens: <br>`"hit" [pos="N"]`] on a large corpus (5 million tokens) could be done in less than *a second* !
+
+
 # Usage
 
-1. Process raw data to match the **required input structure**
-2. Search the corpus with **Corpus Query Language (CQL)**
-3. Do anything you want with **search results**   
+1. Process raw data into the **required input format**^[Refer to the library's doc: https://yongfu.name/concordancer]
+2. Search the corpus with **Corpus Query Language**
+3. Do anything you want with the **search results**   
 (convert to csv, analyze, annotate, etc.)
 
-```{r, irisfigure, fig.cap='The workflow of using *concordancer*', out.width="100%"}
+
+```{r, workflow, fig.cap='The workflow of using *concordancer*', out.width="100%"}
 knitr::include_graphics('https://img.yongfu.name/concordancer/workflow.png')
 ```
 
 
-# Corpus Query Language 
+# Corpus Query Language
 
-See [@evert2009]
+Corpus Query Language (**CQL**) [@evert2009] is a powerful query language designed for searching linguistic corpora used by many corpus systems such as BNCweb and Sketch Engine.
 
-# Implementation
+The full set of CQL is powerful, but may be confusing for users encountering it for the first time. A great place to start is to refer to the documentation of CQL provided by BlackLab [@blacklab].
 
-1. CQL Interpreter
-2. Corpus Indexing
-3. Search Functions
-4. Front-end Application
+# Program Design
 
-How about a neat table of data? See, Table \@ref(tab:iristable):
-
-```{r, iristable}
-knitr::kable(
-  iris[1:8,1:5], format = "html",
-  caption = "A table made with the **knitr::kable** function.",
-  align = "c", col.names = c("Sepal <br> Length",
-                             "Sepal <br> Width",
-                             "Petal <br> Length",
-                             "Petal <br> Width",
-                             "Species"),
-  escape = FALSE)
+**CQL Interpreter**
+: CQL search is supported through cqls^[https://github.com/liao961120/cqls], which turns CQL into a list of queries represented in JSON (see Fig. \@ref(fig:cqls)).  
+```{r cqls, fig.cap='cqls: a simple CQL interpreter in Python', out.width="100%"}
+knitr::include_graphics('https://img.yongfu.name/concordancer/cqls.png')
 ```
 
+**Corpus Indexing**
+: The corpus is indexed (with Python's *dictionary*) to allow for efficient searches [@honghantang2020]. A search on *a corpus of 5 million tokens*^[This is about half the size of the Sinica Corpus 4.0 (http://asbc.iis.sinica.edu.tw)] could be done in less than a second.
+
+**Front-end Application**
+: The library could be run as a web application, where users can interact with the corpus from a *web browser*^[The front-end app originated from a Vue.js project (https://github.com/liao961120/kwic)] (instead of the command line).
+
+
+
 # References
+
+
+
+
+

@@ -33,7 +33,7 @@ Here are the required style attributes for css to make this poster work :)
 -->
 <style>
 @page {
-size: 46in 32in;
+size: 32in 23in;
 margin: 0;
 padding: 0;
 background-color: #ffffff;
@@ -41,10 +41,10 @@ background-color: #ffffff;
 body {
 margin: 0px;
 padding: 0px;
-width: 46in;
-height: 32in;
+width: 32in;
+height: 23in;
 text-align: justify;
-font-size: 45px;
+font-size: 25.35pt;
 background-color: #FFFFFF;
 color: #000000;
 }
@@ -93,7 +93,7 @@ border-radius: 2mm;
 }
 caption {
 margin-bottom: 10px;
-font-size: 20pt;
+font-size: 0.72em;
 font-style: italic;
 }
 
@@ -123,7 +123,7 @@ font-style: italic;
 padding-top: 0;
 }
 .references {
-font-size: 20px;
+font-size: 0.75em;
 line-height: 90%;
 }
 /* Create three unequal columns that floats next to each other */
@@ -132,8 +132,8 @@ float: left;
 padding: 0px;
 }
 .outer {
-width: 46in;
-height: 32in;
+width: 32in;
+height: 23in;
 -webkit-column-count: 2; /* Chrome, Safari, Opera */
 -moz-column-count: 2; /* Firefox */
 column-count: 2;
@@ -163,7 +163,7 @@ text-decoration: none;
 color: #4382B4;
 }
 #title {
-font-size: 118px;
+font-size: 2.525em;
 text-align: left;
 margin: 0;
 line-height: 90%;
@@ -180,7 +180,7 @@ font-size: 1.17em;
 padding-top: 1em;
 color: #00000060;
 font-style: italic;
-font-size: 25px;
+font-size: 0.85em;
 margin: 0;
 }
 sup {
@@ -196,7 +196,7 @@ font-size: 30px;
 color: #4382B4;
 margin: 0;
 line-height: 85%;
-font-size: 35px;
+font-size: 0.9em;
 }
 .outer h1 {
 text-align: center;
@@ -213,10 +213,10 @@ color: #000000;
 text-align: left;
 }
 .main {
-width: calc(46in * 0.5);
-height: 32in;
+width: calc(32in * 0.5);
+height: 23in;
 position: absolute;
-margin-left: calc(46in * 0.25);
+margin-left: calc(32in * 0.25);
 background-color: #2A5A83;
 color: #FFFFFF90;
 font-family: Palatino;
@@ -239,7 +239,7 @@ position: absolute;
 }
 .main p {
 padding-top: 20%;
-font-size: 170px;
+font-size: 4em;
 text-align: left;
 }
 .fab {
@@ -277,8 +277,8 @@ font-size: 35px;
 text-decoration: none;
 }
 .poster_wrap {
-width: 46in;
-height: 32in;
+width: 32in;
+height: 23in;
 padding: 0cm;
 background-color: #ffffff;
 }
@@ -311,7 +311,8 @@ span > #tab:mytable {
 <div class="column outer">
 <br>
 <div class="title section">
-<h1 id="title"><div class="line-block">A Python Library for<br />
+<h1 id="title"><div class="line-block">Concordancer:<br />
+A Python Library for<br />
 Concordance Search<br />
 with CQL</div></h1>
 <br>
@@ -331,38 +332,20 @@ Yongfu Liao<sup> </sup><br>
 </p>
 
 </div>
-<style>
-.main .py-yellow strong {
-  color:#FFD846;!important
-}
-.main p {
-  padding-top: 10%;
-}
-#affiliation {
-  font-size: 0.82em;
-  font-style: normal;
-}
-.fa-envelope {
-  margin-top: 15px;
-}
-#refs > div > p {
-  text-align: left;
-  font-size: 1.5em;
-  line-height: 1.1em;
-}
-</style>
+<p><link rel="stylesheet" href="custom.css"></p>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
+<p><em>Concordancer</em> is a Python (≥3.7) library for corpus building and search. It aims at <strong>alleviating the pain of building and searching corpora from self-collected text data</strong>. Most existing corpus systems (BNC, COCA, ASBC, etc.) provide search interfaces through the web and could be searched with a <em>powerful query language</em> designed for locating complex linguistic patterns. Though powerful, these systems become useless when a researcher wants to use her <em>own data</em> for research. Limited by the programing skills she has, she could not locate the <em>linguitic pattern</em> necessary for her study. <em>Concordancer</em> is here to fill the gap by providing a useful subset of the mighty <strong>Corpus Query Language</strong> (<strong>CQL</strong>) <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span>. Furthermore, it is <strong>fast</strong>: simple searches<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> on a large corpus (5 million tokens) could be done in less than <em>a second</em> !</p>
 </div>
 <div id="usage" class="section level1">
 <h1>Usage</h1>
 <ol style="list-style-type: decimal">
-<li>Process raw data to match the <strong>required input structure</strong></li>
-<li>Search the corpus with <strong>Corpus Query Language (CQL)</strong></li>
-<li>Do anything you want with <strong>search results</strong><br />
+<li>Process raw data into the <strong>required input format</strong><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></li>
+<li>Search the corpus with <strong>Corpus Query Language</strong></li>
+<li>Do anything you want with the <strong>search results</strong><br />
 (convert to csv, analyze, annotate, etc.)</li>
 </ol>
-<div class="figure" style="text-align: center"><span id="fig:irisfigure"></span>
+<div class="figure" style="text-align: center"><span id="fig:workflow"></span>
 <img src="https://img.yongfu.name/concordancer/workflow.png" alt="The workflow of using *concordancer*" width="100%" />
 <p class="caption">
 Figure 1: The workflow of using <em>concordancer</em>
@@ -371,198 +354,61 @@ Figure 1: The workflow of using <em>concordancer</em>
 </div>
 <div id="corpus-query-language" class="section level1">
 <h1>Corpus Query Language</h1>
-<p>See <span class="citation">(Evert <a href="#ref-evert2009" role="doc-biblioref">2009</a>)</span></p>
+<p>Corpus Query Language (<strong>CQL</strong>) <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span> is a powerful query language designed for searching linguistic corpora used by many corpus systems such as BNCweb and Sketch Engine.</p>
+<p>The full set of CQL is powerful, but may be confusing for users encountering it for the first time. A great place to start is to refer to the documentation of CQL provided by BlackLab <span class="citation">[<a href="#ref-blacklab" role="doc-biblioref">2</a>]</span>.</p>
 </div>
-<div id="implementation" class="section level1">
-<h1>Implementation</h1>
-<ol style="list-style-type: decimal">
-<li>CQL Interpreter</li>
-<li>Corpus Indexing</li>
-<li>Search Functions</li>
-<li>Front-end Application</li>
-</ol>
-<p>How about a neat table of data? See, Table <a href="#tab:iristable">1</a>:</p>
-<table>
-<caption>
-<span id="tab:iristable">Table 1: </span>A table made with the <strong>knitr::kable</strong> function.
-</caption>
-<thead>
-<tr>
-<th style="text-align:center;">
-Sepal <br> Length
-</th>
-<th style="text-align:center;">
-Sepal <br> Width
-</th>
-<th style="text-align:center;">
-Petal <br> Length
-</th>
-<th style="text-align:center;">
-Petal <br> Width
-</th>
-<th style="text-align:center;">
-Species
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;">
-5.1
-</td>
-<td style="text-align:center;">
-3.5
-</td>
-<td style="text-align:center;">
-1.4
-</td>
-<td style="text-align:center;">
-0.2
-</td>
-<td style="text-align:center;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4.9
-</td>
-<td style="text-align:center;">
-3.0
-</td>
-<td style="text-align:center;">
-1.4
-</td>
-<td style="text-align:center;">
-0.2
-</td>
-<td style="text-align:center;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4.7
-</td>
-<td style="text-align:center;">
-3.2
-</td>
-<td style="text-align:center;">
-1.3
-</td>
-<td style="text-align:center;">
-0.2
-</td>
-<td style="text-align:center;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4.6
-</td>
-<td style="text-align:center;">
-3.1
-</td>
-<td style="text-align:center;">
-1.5
-</td>
-<td style="text-align:center;">
-0.2
-</td>
-<td style="text-align:center;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-5.0
-</td>
-<td style="text-align:center;">
-3.6
-</td>
-<td style="text-align:center;">
-1.4
-</td>
-<td style="text-align:center;">
-0.2
-</td>
-<td style="text-align:center;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-5.4
-</td>
-<td style="text-align:center;">
-3.9
-</td>
-<td style="text-align:center;">
-1.7
-</td>
-<td style="text-align:center;">
-0.4
-</td>
-<td style="text-align:center;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4.6
-</td>
-<td style="text-align:center;">
-3.4
-</td>
-<td style="text-align:center;">
-1.4
-</td>
-<td style="text-align:center;">
-0.3
-</td>
-<td style="text-align:center;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-5.0
-</td>
-<td style="text-align:center;">
-3.4
-</td>
-<td style="text-align:center;">
-1.5
-</td>
-<td style="text-align:center;">
-0.2
-</td>
-<td style="text-align:center;">
-setosa
-</td>
-</tr>
-</tbody>
-</table>
+<div id="program-design" class="section level1">
+<h1>Program Design</h1>
+<dl>
+<dt><strong>CQL Interpreter</strong></dt>
+<dd>CQL search is supported through cqls<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, which turns CQL into a list of queries represented in JSON (see Fig. <a href="#fig:cqls">2</a>).<br />
+
+<div class="figure" style="text-align: center"><span id="fig:cqls"></span>
+<img src="https://img.yongfu.name/concordancer/cqls.png" alt="cqls: a simple CQL interpreter in Python" width="100%" />
+<p class="caption">
+Figure 2: cqls: a simple CQL interpreter in Python
+</p>
+</div>
+</dd>
+<dt><strong>Corpus Indexing</strong></dt>
+<dd>The corpus is indexed (with Python’s <em>dictionary</em>) to allow for efficient searches <span class="citation">[<a href="#ref-honghantang2020" role="doc-biblioref">3</a>]</span>. A search on <em>a corpus of 5 million tokens</em><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> could be done in less than a second.
+</dd>
+<dt><strong>Front-end Application</strong></dt>
+<dd>The library could be run as a web application, where users can interact with the corpus from a <em>web browser</em><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> (instead of the command line).
+</dd>
+</dl>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
-<div id="refs" class="references hanging-indent">
-<div id="ref-callanan2020">
-<p>Callanan, David. 2020. “Simple Math Interpreter in Python.” <a href="https://www.youtube.com/playlist?list=PLZQftyCk7_Sdu5BFaXB_jLeJ9C78si5_3">https://www.youtube.com/playlist?list=PLZQftyCk7_Sdu5BFaXB_jLeJ9C78si5_3</a>.</p>
-</div>
+<div id="refs" class="references">
 <div id="ref-evert2009">
-<p>Evert, Stefan. 2009. “The CQP Query Language Tutorial.” <a href="http://cwb.sourceforge.net/temp/CQPTutorial.pdf">http://cwb.sourceforge.net/temp/CQPTutorial.pdf</a>.</p>
+<p>[1] S. Evert, “The CQP query language tutorial.” 2009, [Online]. Available: <a href="http://cwb.sourceforge.net/temp/CQPTutorial.pdf">http://cwb.sourceforge.net/temp/CQPTutorial.pdf</a>.</p>
+</div>
+<div id="ref-blacklab">
+<p>[2] BlackLab, “BlackLab Corpus Query Language.” <a href="http://inl.github.io/BlackLab/corpus-query-language">http://inl.github.io/BlackLab/corpus-query-language</a>.</p>
 </div>
 <div id="ref-honghantang2020">
-<p>洪漢唐, and 江琼玉. 2020. “小農手作： 語料庫索引與建置.” <a href="https://docs.google.com/presentation/d/1c_xfgZI5YUCJSanj7l_E9O_0MYGOlZD1vqFSuv6Rp0I">https://docs.google.com/presentation/d/1c_xfgZI5YUCJSanj7l_E9O_0MYGOlZD1vqFSuv6Rp0I</a>.</p>
+<p>[3] 洪漢唐 and 江琼玉, “小農手作： 語料庫索引與建置,” Dec. 12, 2020.</p>
+</div>
+<div id="ref-callanan2020">
+<p>[4] D. Callanan, “Simple Math Interpreter in Python,” Feb. 19, 2020.</p>
 </div>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Such as finding exact matches of a sequence of tokens: <br><code>"hit" [pos="N"]</code><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Refer to the library’s doc: <a href="https://yongfu.name/concordancer" class="uri">https://yongfu.name/concordancer</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://github.com/liao961120/cqls" class="uri">https://github.com/liao961120/cqls</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>This is about half the size of the Sinica Corpus 4.0 (<a href="http://asbc.iis.sinica.edu.tw" class="uri">http://asbc.iis.sinica.edu.tw</a>)<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>The front-end app originated from a Vue.js project (<a href="https://github.com/liao961120/kwic" class="uri">https://github.com/liao961120/kwic</a>)<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
 </div>
 <div class="main">
-<p>Turn <strong>text data</strong> into a <span class="py-yellow"><strong>Searchable Corpus</strong></span> with <br/><strong>5 lines</strong> of code in <span class="py-yellow"><strong>Python</strong></span><br><br> <img src="https://img.yongfu.name/concordancer/query_interface.png" class="main_pic" /></p>
+<p>Turn <strong>text data</strong> into a <span class="py-yellow"><strong>Searchable Corpus</strong></span> with <br/><strong>5 lines</strong> of <span class="py-yellow"><strong>Python</strong></span><br><br> <img src="https://img.yongfu.name/concordancer/query_interface2.png" class="main_pic" /></p>
 <img src="https://img.yongfu.name/concordancer/QR_code.png" class="main-img-left" />
 <img src="https://img.yongfu.name/affiliations/GIL.png" class="main-img-right" />
 </div>
