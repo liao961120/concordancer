@@ -66,7 +66,7 @@ dev.off()
 
 # Introduction
 
-*Concordancer* is a Python (≥3.7) library for corpus building and search. It aims at **alleviating the pain of building and searching corpora from self-collected text data**. Most existing large corpora (BNC, COCA, ASBC, etc.) provide web-based search interfaces and support searching with *powerful query languages* designed for locating complex linguistic patterns in a corpus. Though powerful, these corpora become useless when a researcher wants to use her *own data* for research. Limited by her programing skills, she may not be able to retrieve the necessary data from the corpus for a study. *Concordancer* is here to fill this gap by providing a useful subset of the mighty **Corpus Query Language** (**CQL**) [@evert2009]. Furthermore, concordance search with *Concordancer* is **fast**: simple searches on a large corpus (5 million tokens) could be done in less than *a second* !
+*Concordancer* is a Python (≥3.7) library for corpus building and search. It aims at **alleviating the pain of building and searching corpora from self-collected text data**. Most existing large corpora (BNC, COCA, ASBC, etc.) provide web-based search interfaces and support searching with powerful query languages designed for locating complex linguistic patterns in a corpus. Though powerful, these corpora become useless when researchers wants to **use their own data for research**. Limited by the programing skills they have, researchers may not be able to retrieve the necessary data from the corpus for a study. *Concordancer* is here to fill this gap by providing a useful subset of the mighty Corpus Query Language (CQL) [@evert2009], enabling users to locate complex linguistic patterns in their own corpora!
 
 
 # Usage
@@ -88,7 +88,7 @@ knitr::include_graphics('https://img.yongfu.name/concordancer/workflow.png')
 
 Corpus Query Language (**CQL**) [@evert2009] is a powerful query language designed for searching linguistic corpora and is used by many corpus systems such as the BNCweb and the Sketch Engine.
 
-The full set of CQL is large and often confuses users who encounter it for the first time. A great place to start learning CQL is the documentation of CQL provided by BlackLab [@blacklab]. A more complete tutorial on CQL can be found in [@evert2009].
+The full set of CQL is large and often confuses users encountering it for the first time. A great place to start learning CQL is the documentation of CQL provided by BlackLab [@blacklab]. A more complete tutorial on CQL can be found in [@evert2009].
 
 # Program Design
 
@@ -99,10 +99,10 @@ knitr::include_graphics('https://img.yongfu.name/concordancer/cqls.png')
 ```
 
 **Corpus Indexing**
-: The corpus is indexed (with Python's *dictionary*) to allow for **efficient searches** [@honghantang2020] in *Concordancer*. A simple search on a corpus of 5 million tokens^[This is about half the size of the Sinica Corpus 4.0] could be done in less than a second.
+: The corpus loaded into *Concordancer* is indexed^[Index is constructed with Python's *dictionary*] to allow for **efficient searches** [@honghantang]. A simple search on a corpus with 5 million tokens^[This is about half the size of the Sinica Corpus 4.0] could be done in less than a second!
 
 **Front-end Application**
-: *Concordancer* could be run as a web application, where users can interact with the corpus from a **web browser** (instead of the command line).
+: *Concordancer* could be run as a web application, where users can interact with the corpus through a **web browser** (instead of the command line).
 
 
 
