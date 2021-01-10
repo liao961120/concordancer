@@ -86,7 +86,7 @@ knitr::include_graphics('https://img.yongfu.name/concordancer/workflow.png')
 
 # <br> Corpus Query Language {#corpus-query-language}
 
-Corpus Query Language (**CQL**) [@evert2009] is a powerful query language designed for searching linguistic corpora and is used by many corpus systems such as the BNCweb and the Sketch Engine.
+Corpus Query Language (CQL) [@evert2009] is a powerful query language designed for searching linguistic corpora and is used by many corpus systems such as the BNCweb and the Sketch Engine.
 
 The full set of CQL is large and often confuses users encountering it for the first time. A great place to start learning CQL is the documentation of CQL provided by BlackLab [@blacklab]. A more complete tutorial on CQL can be found in [@evert2009].
 
