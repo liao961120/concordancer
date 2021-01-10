@@ -40,8 +40,8 @@ output:
 link-citations: true
 bibliography: concordaner.bib
 csl: ieee.csl
-nocite: | 
-  @@callanan2020
+nocite: |
+  @*
 ---
 
 <link rel="stylesheet" href="custom.css">
