@@ -335,7 +335,7 @@ Yongfu Liao<sup> </sup><br>
 <p><link rel="stylesheet" href="custom.css"></p>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p><em>Concordancer</em> is a Python (≥3.7) library for corpus building and search. It aims at <strong>alleviating the pain of building and searching corpora from self-collected text data</strong>. Most existing large corpora (BNC, COCA, ASBC, etc.) provide web-based search interfaces and support searching with <em>powerful query languages</em> designed for locating complex linguistic patterns in a corpus. Though powerful, these corpora become useless when a researcher wants to use her <em>own data</em> for research. Limited by her programing skills, she may not be able to retrieve the necessary data from the corpus for a study. <em>Concordancer</em> is here to fill this gap by providing a useful subset of the mighty <strong>Corpus Query Language</strong> (<strong>CQL</strong>) <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span>. Furthermore, concordance search with <em>Concordancer</em> is <strong>fast</strong>: simple searches on a large corpus (5 million tokens) could be done in less than <em>a second</em> !</p>
+<p><em>Concordancer</em> is a Python (≥3.7) library for corpus building and search. It aims at <strong>alleviating the pain of building and searching corpora from self-collected text data</strong>. Most existing large corpora (BNC, COCA, ASBC, etc.) provide web-based search interfaces and support searching with powerful query languages designed for locating complex linguistic patterns in a corpus. Though powerful, these corpora become useless when researchers wants to <strong>use their own data for research</strong>. Limited by the programing skills they have, researchers may not be able to retrieve the necessary data from the corpus for a study. <em>Concordancer</em> is here to fill this gap by providing a useful subset of the mighty Corpus Query Language (CQL) <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span>, enabling users to locate complex linguistic patterns in their own corpora!</p>
 </div>
 <div id="usage" class="section level1">
 <h1>Usage</h1>
@@ -355,8 +355,8 @@ Figure 1: The workflow for using <em>Concordancer</em>
 </div>
 <div id="corpus-query-language" class="section level1">
 <h1><br> Corpus Query Language</h1>
-<p>Corpus Query Language (<strong>CQL</strong>) <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span> is a powerful query language designed for searching linguistic corpora and is used by many corpus systems such as the BNCweb and the Sketch Engine.</p>
-<p>The full set of CQL is large and often confuses users who encounter it for the first time. A great place to start learning CQL is the documentation of CQL provided by BlackLab <span class="citation">[<a href="#ref-blacklab" role="doc-biblioref">2</a>]</span>. A more complete tutorial on CQL can be found in <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span>.</p>
+<p>Corpus Query Language (CQL) <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span> is a powerful query language designed for searching linguistic corpora and is used by many corpus systems such as the BNCweb and the Sketch Engine.</p>
+<p>The full set of CQL is large and often confuses users encountering it for the first time. A great place to start learning CQL is the documentation of CQL provided by BlackLab <span class="citation">[<a href="#ref-blacklab" role="doc-biblioref">2</a>]</span>. A more complete tutorial on CQL can be found in <span class="citation">[<a href="#ref-evert2009" role="doc-biblioref">1</a>]</span>.</p>
 </div>
 <div id="program-design" class="section level1">
 <h1>Program Design</h1>
@@ -372,10 +372,10 @@ Figure 2: A simple CQL interpreter written in Python
 </div>
 </dd>
 <dt><strong>Corpus Indexing</strong></dt>
-<dd>The corpus is indexed (with Python’s <em>dictionary</em>) to allow for <strong>efficient searches</strong> <span class="citation">[<a href="#ref-honghantang2020" role="doc-biblioref">3</a>]</span> in <em>Concordancer</em>. A simple search on a corpus of 5 million tokens<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> could be done in less than a second.
+<dd>The corpus loaded into <em>Concordancer</em> is indexed<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> to allow for <strong>efficient searches</strong> <span class="citation">[<a href="#ref-honghantang" role="doc-biblioref">3</a>]</span>. A simple search on a corpus with 5 million tokens<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> could be done in less than a second!
 </dd>
 <dt><strong>Front-end Application</strong></dt>
-<dd><em>Concordancer</em> could be run as a web application, where users can interact with the corpus from a <strong>web browser</strong> (instead of the command line).
+<dd><em>Concordancer</em> could be run as a web application, where users can interact with the corpus through a <strong>web browser</strong> (instead of the command line).
 </dd>
 </dl>
 </div>
@@ -388,8 +388,8 @@ Figure 2: A simple CQL interpreter written in Python
 <div id="ref-blacklab">
 <p>[2] BlackLab, “BlackLab Corpus Query Language.” <a href="http://inl.github.io/BlackLab/corpus-query-language">http://inl.github.io/BlackLab/corpus-query-language</a>.</p>
 </div>
-<div id="ref-honghantang2020">
-<p>[3] 洪漢唐 and 江琼玉, “小農手作： 語料庫索引與建置,” Dec. 12, 2020.</p>
+<div id="ref-honghantang">
+<p>[3] 洪漢唐 and 江琼玉, “小農手作： 語料庫索引與建置,” <em>HOCOR 2020</em>.</p>
 </div>
 <div id="ref-callanan2020">
 <p>[4] D. Callanan, “Simple Math Interpreter in Python,” Feb. 19, 2020.</p>
@@ -401,7 +401,8 @@ Figure 2: A simple CQL interpreter written in Python
 <ol>
 <li id="fn1"><p>Refer to the library’s doc: <a href="https://yongfu.name/concordancer" class="uri">https://yongfu.name/concordancer</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p><a href="https://github.com/liao961120/cqls" class="uri">https://github.com/liao961120/cqls</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>This is about half the size of the Sinica Corpus 4.0<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Index is constructed with Python’s <em>dictionary</em><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>This is about half the size of the Sinica Corpus 4.0<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
