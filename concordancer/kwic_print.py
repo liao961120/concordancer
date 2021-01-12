@@ -6,7 +6,7 @@ class KWIC:
     """Printing concordance data in keyword-in-context format
     """
 
-    def __init__(self, concordance:Union[Sequence, Generator], print_idx:Sequence[int]=range(10)):
+    def __init__(self, concordance:Union[Sequence, Generator]):
         """Initialize a concordance list as KWIC and print it out
 
         Parameters
@@ -22,14 +22,12 @@ class KWIC:
         self.data = concordance
         self.print_keys = ['left', 'keyword', 'right', 'captureGroups']
         self.captureGroup_keys = set()
-        self.print_idx = print_idx
-
-        self.print(print_idx=self.print_idx)
+        self.print()
     
     def __str__(self):
         return self.data
     
-    def print(self, attrs=['word', 'pos'], print_idx:Sequence[int]=None):
+    def print(self, attrs=['word', 'pos']):
         """Pretty print a concordance list
 
         Parameters
@@ -44,7 +42,7 @@ class KWIC:
         """
         print_data = []
         for concord in self.data:
-            concord = _keep_dict_keys(concord, self.print_keys)
+            concord = _keep_dict_keys(deepcopy(concord), self.print_keys)
 
             if 'captureGroups' in concord:
                 for label, tokens in concord.get('captureGroups').items():
@@ -61,16 +59,6 @@ class KWIC:
             # Separate word/tag
             concord = self._separate_attrs(concord, attrs)
             print_data.append(concord)
-        
-        if print_idx != None:
-            print_data2 = []
-            for i in print_idx:
-                try:
-                    x = print_data[i]
-                except:
-                    continue
-                print_data2.append(x)
-            print_data = print_data2
         
         print(tabulate(print_data, headers="keys"))
 
@@ -91,7 +79,6 @@ class KWIC:
             An concordance object with lists replaced with string 
             for printing
         """
-
         for key in self.print_keys:
             if key == 'captureGroups': continue
             tokens = []

@@ -14,6 +14,9 @@ class IndexedCorpus:
         ----------
         corpus : list
             Corpus data
+        text_key: str
+            The key to where text is stored in a JSON file,
+            by default "text"
 
         Notes
         -----
