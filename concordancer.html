@@ -192,6 +192,53 @@
 </tbody>
 </table>
 <dl class="py method">
+<dt id="concordancer.concordancer.Concordancer.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">text_key</span><span class="o">=</span><span class="default_value">'text'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#concordancer.concordancer.Concordancer.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indexing corpus</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>corpus</strong><span class="classifier">list</span></dt><dd><p>Corpus data</p>
+</dd>
+<dt><strong>text_key: str</strong></dt><dd><p>The key to where text is stored in a JSON file,
+by default “text”</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Structure of corpus could be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;&lt;text_dictkey&gt;&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;word&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;pos&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;pos&gt;&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;word&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;pos&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;pos&gt;&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;word&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;word&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;pos&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;pos&gt;&quot;</span><span class="p">},</span>
+            <span class="o">...</span>
+        <span class="p">],</span>
+        <span class="o">...</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Or, simply a nested list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="p">[</span><span class="s2">&quot;&lt;word&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;pos&gt;&quot;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;&lt;word&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;pos&gt;&quot;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;&lt;word&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;pos&gt;&quot;</span><span class="p">],</span>
+            <span class="o">...</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">],</span>  <span class="c1"># another text</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt id="concordancer.concordancer.Concordancer.cql_search">
 <code class="sig-name descname">cql_search</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cql</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">left</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">right</span><span class="o">=</span><span class="default_value">5</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/concordancer.html#Concordancer.cql_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#concordancer.concordancer.Concordancer.cql_search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search the corpus with Corpus Query Language</p>
