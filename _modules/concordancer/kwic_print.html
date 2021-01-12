@@ -165,7 +165,7 @@
     <span class="sd">&quot;&quot;&quot;Printing concordance data in keyword-in-context format</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concordance</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">,</span> <span class="n">Generator</span><span class="p">],</span> <span class="n">print_idx</span><span class="p">:</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concordance</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">,</span> <span class="n">Generator</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;Initialize a concordance list as KWIC and print it out</span>
 
 <span class="sd">        Parameters</span>
@@ -181,14 +181,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">concordance</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">print_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;keyword&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;captureGroups&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">captureGroup_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">print_idx</span> <span class="o">=</span> <span class="n">print_idx</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">print_idx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">print_idx</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
     
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
     
-<div class="viewcode-block" id="KWIC.print"><a class="viewcode-back" href="../../kwic_print.html#concordancer.kwic_print.KWIC.print">[docs]</a>    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">],</span> <span class="n">print_idx</span><span class="p">:</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="KWIC.print"><a class="viewcode-back" href="../../kwic_print.html#concordancer.kwic_print.KWIC.print">[docs]</a>    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;Pretty print a concordance list</span>
 
 <span class="sd">        Parameters</span>
@@ -203,7 +201,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">print_data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">concord</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
-            <span class="n">concord</span> <span class="o">=</span> <span class="n">_keep_dict_keys</span><span class="p">(</span><span class="n">concord</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_keys</span><span class="p">)</span>
+            <span class="n">concord</span> <span class="o">=</span> <span class="n">_keep_dict_keys</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">concord</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_keys</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="s1">&#39;captureGroups&#39;</span> <span class="ow">in</span> <span class="n">concord</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">concord</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;captureGroups&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -220,16 +218,6 @@
             <span class="c1"># Separate word/tag</span>
             <span class="n">concord</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_separate_attrs</span><span class="p">(</span><span class="n">concord</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
             <span class="n">print_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">concord</span><span class="p">)</span>
-        
-        <span class="k">if</span> <span class="n">print_idx</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">print_data2</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">print_idx</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">x</span> <span class="o">=</span> <span class="n">print_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="k">continue</span>
-                <span class="n">print_data2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">print_data</span> <span class="o">=</span> <span class="n">print_data2</span>
         
         <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">print_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;keys&quot;</span><span class="p">))</span></div>
 
@@ -250,7 +238,6 @@
 <span class="sd">            An concordance object with lists replaced with string </span>
 <span class="sd">            for printing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_keys</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;captureGroups&#39;</span><span class="p">:</span> <span class="k">continue</span>
             <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
