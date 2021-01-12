@@ -8,7 +8,7 @@ from collections import Counter
 class IndexedCorpus:
 
     def __init__(self, corpus: list, text_key="text"):
-        """[summary]
+        """Indexing corpus
 
         Parameters
         ----------
