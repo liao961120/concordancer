@@ -81,7 +81,13 @@ def append_regex_anchors(x: str):
 
 def match_mode(x: str):
     if is_regex(x):
-        return x, "regex"
+        try:
+            re.compile(x)
+            is_valid = True
+        except re.error:
+            is_valid = False
+        if is_valid:
+            return x, "regex"
     return x.replace(ESCAPE, ''), "literal"
 
 
