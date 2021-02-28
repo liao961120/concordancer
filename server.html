@@ -168,7 +168,7 @@
 <span id="searching-in-web-browser"></span><h1>Searching in Web Browser<a class="headerlink" href="#module-concordancer.server" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="concordancer.server.ConcordancerBackend">
-<em class="property">class </em><code class="sig-prename descclassname">concordancer.server.</code><code class="sig-name descname">ConcordancerBackend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Concordancer</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#ConcordancerBackend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#concordancer.server.ConcordancerBackend" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">concordancer.server.</span></code><code class="sig-name descname"><span class="pre">ConcordancerBackend</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Concordancer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#ConcordancerBackend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#concordancer.server.ConcordancerBackend" title="Permalink to this definition">¶</a></dt>
 <dd><p>Falcon API to serve the concordancer object for the query interface</p>
 <p class="rubric">Notes</p>
 <p>Two API endpoints, <code class="docutils literal notranslate"><span class="pre">/query</span></code> and <code class="docutils literal notranslate"><span class="pre">/export</span></code>, are exposed. The endpoint 
@@ -195,7 +195,7 @@ For the endpoint <code class="docutils literal notranslate"><span class="pre">/q
 </table>
 <dl class="py method">
 <dt id="concordancer.server.ConcordancerBackend.on_get">
-<code class="sig-name descname">on_get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">req</span></em>, <em class="sig-param"><span class="n">resp</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#ConcordancerBackend.on_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#concordancer.server.ConcordancerBackend.on_get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">on_get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">req</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#ConcordancerBackend.on_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#concordancer.server.ConcordancerBackend.on_get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handling GET requests sent to <code class="docutils literal notranslate"><span class="pre">/query</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -220,7 +220,7 @@ of characters converted, refer to <a class="reference external" href="https://gi
 
 <dl class="py method">
 <dt id="concordancer.server.ConcordancerBackend.on_get_export">
-<code class="sig-name descname">on_get_export</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">req</span></em>, <em class="sig-param"><span class="n">resp</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#ConcordancerBackend.on_get_export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#concordancer.server.ConcordancerBackend.on_get_export" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">on_get_export</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">req</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#ConcordancerBackend.on_get_export"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#concordancer.server.ConcordancerBackend.on_get_export" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handling GET requests sent to <code class="docutils literal notranslate"><span class="pre">/export</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -240,7 +240,7 @@ of characters converted, refer to <a class="reference external" href="https://gi
 
 <dl class="py function">
 <dt id="concordancer.server.download_query_interface">
-<code class="sig-prename descclassname">concordancer.server.</code><code class="sig-name descname">download_query_interface</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#download_query_interface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#concordancer.server.download_query_interface" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">concordancer.server.</span></code><code class="sig-name descname"><span class="pre">download_query_interface</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#download_query_interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#concordancer.server.download_query_interface" title="Permalink to this definition">¶</a></dt>
 <dd><p>Download and extract query interface from web</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -258,7 +258,7 @@ the default URL specified by the library</p>
 
 <dl class="py function">
 <dt id="concordancer.server.query_interface_path">
-<code class="sig-prename descclassname">concordancer.server.</code><code class="sig-name descname">query_interface_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#query_interface_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#concordancer.server.query_interface_path" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">concordancer.server.</span></code><code class="sig-name descname"><span class="pre">query_interface_path</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#query_interface_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#concordancer.server.query_interface_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the local path to the query interface</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -272,7 +272,7 @@ the default URL specified by the library</p>
 
 <dl class="py function">
 <dt id="concordancer.server.run">
-<code class="sig-prename descclassname">concordancer.server.</code><code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Concordancer</span></em>, <em class="sig-param"><span class="n">port</span><span class="o">=</span><span class="default_value">1420</span></em>, <em class="sig-param"><span class="n">url</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">open_browser</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#concordancer.server.run" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">concordancer.server.</span></code><code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Concordancer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1420</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open_browser</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/concordancer/server.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#concordancer.server.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Serve the concordancer object to allow searching with the web browser</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
