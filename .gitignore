@@ -13,3 +13,4 @@ dist.zip
 .vscode
 /docs/build
 *_cache
+/kwic/node_modules
