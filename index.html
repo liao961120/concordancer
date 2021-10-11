@@ -1,72 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Concordancer &mdash; concordancer 0.1.10 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-
-  
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  
-
-  
-  
-
-  
-
-  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Concordancer" href="concordancer.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="#" class="icon icon-home"> concordancer
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -74,112 +37,60 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Function Documentation</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Function Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="concordancer.html">Concordancer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="server.html">Searching in Web Browser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kwic_print.html">Keyword in Context</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo.html">Miscellaneous Functions for Demonstration</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Example Usage</span></p>
+<p class="caption" role="heading"><span class="caption-text">Example Usage</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Finding_Collocations_with_Concordancer.html">1. Finding Collocations with Concordancer</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="#">concordancer</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Concordancer</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <a class="reference external image-reference" href="https://img.shields.io/badge/python-%E2%89%A5%203.7-blue.svg"><img alt="Support Python Version" src="https://img.shields.io/badge/python-%E2%89%A5%203.7-blue.svg" /></a>
-<div class="section" id="concordancer">
-<h1>Concordancer<a class="headerlink" href="#concordancer" title="Permalink to this headline">¶</a></h1>
+<section id="concordancer">
+<h1>Concordancer<a class="headerlink" href="#concordancer" title="Permalink to this headline"></a></h1>
 <p>This library loads and indexes a corpus in RAM and provides concordance search to retrieve data from the corpus with (a subset of) Corpus Query Language (CQL).</p>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -U concordancer
 </pre></div>
 </div>
-</div>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
 <p><a class="reference external" href="https://github.com/liao961120/concordancer">Concordancer</a> is designed with this workflow in mind:</p>
 <a class="reference external image-reference" href="https://img.yongfu.name/concordancer/workflow.png"><img alt="" src="https://img.yongfu.name/concordancer/workflow.png" /></a>
 <p>The user is expected to preprocess the text data to match the corpus data required by <code class="docutils literal notranslate"><span class="pre">concordancer</span></code>. Once this is done, subsequent tasks such as indexing the copus, writing query functions to search the corpus, and displaying results in an aligned keyword-in-context format are all done by <code class="docutils literal notranslate"><span class="pre">concordancer</span></code>. The user could then further process the search results (exported as JSON by <code class="docutils literal notranslate"><span class="pre">concordancer</span></code>) for other uses.</p>
-<div class="section" id="input-corpus-data-structure">
-<h3>Input corpus data structure<a class="headerlink" href="#input-corpus-data-structure" title="Permalink to this headline">¶</a></h3>
+<section id="input-corpus-data-structure">
+<h3>Input corpus data structure<a class="headerlink" href="#input-corpus-data-structure" title="Permalink to this headline"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">concordancer</span></code> requires the corpus to be structured (minimally) as:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>  <span class="c1"># a corpus</span>
     <span class="p">{</span>       <span class="c1"># a text</span>
@@ -204,9 +115,9 @@
 </pre></div>
 </div>
 <p>This structure allows the corpus to be saved conveniently as a <a class="reference external" href="https://jsonlines.org">newline-delimited JSON</a> file (<code class="docutils literal notranslate"><span class="pre">.jsonl</span></code>), where each line of the file corresponds to a single text in the corpus, represented as a JSON object (i.e., a dictionary in Python). You can see an example of the corpus file saved in <code class="docutils literal notranslate"><span class="pre">.jsonl</span></code> <a class="reference external" href="https://github.com/liao961120/concordancer/blob/main/example-corpus-data/tokenDict.jsonl">here</a>. The code below uses a corpus saved in <code class="docutils literal notranslate"><span class="pre">.jsonl</span></code> format for demonstration.</p>
-</div>
-<div class="section" id="loading-a-corpus-from-file">
-<h3>Loading a corpus from file<a class="headerlink" href="#loading-a-corpus-from-file" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="loading-a-corpus-from-file">
+<h3>Loading a corpus from file<a class="headerlink" href="#loading-a-corpus-from-file" title="Permalink to this headline"></a></h3>
 <p>The code below uses an <a class="reference external" href="https://github.com/liao961120/concordancer/tree/main/test-data">example corpus</a>, which is saved as a <strong>newline-delimited JSON</strong> file (described in the previous section).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">concordancer.demo</span> <span class="kn">import</span> <span class="n">download_demo_corpus</span>
@@ -223,9 +134,9 @@
 <span class="n">C</span><span class="o">.</span><span class="n">set_cql_parameters</span><span class="p">(</span><span class="n">default_attr</span><span class="o">=</span><span class="s2">&quot;word&quot;</span><span class="p">,</span> <span class="n">max_quant</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="interactive-search-interface">
-<h3>Interactive Search Interface<a class="headerlink" href="#interactive-search-interface" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="interactive-search-interface">
+<h3>Interactive Search Interface<a class="headerlink" href="#interactive-search-interface" title="Permalink to this headline"></a></h3>
 <p>You can start an interactive server to query and read results through your browser:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
 <span class="go">Initializing server...</span>
@@ -233,9 +144,9 @@
 </pre></div>
 </div>
 <a class="reference external image-reference" href="https://img.yongfu.name/concordancer/query_interface.png"><img alt="" src="https://img.yongfu.name/concordancer/query_interface.png" /></a>
-</div>
-<div class="section" id="cql-concordance-search">
-<h3>CQL Concordance search<a class="headerlink" href="#cql-concordance-search" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="cql-concordance-search">
+<h3>CQL Concordance search<a class="headerlink" href="#cql-concordance-search" title="Permalink to this headline"></a></h3>
 <p>Alternatively, you can work with the <code class="docutils literal notranslate"><span class="pre">Concordancer</span></code> object, which allows you to send CQL queries to the corpus:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cql</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">verb:[pos=&quot;V.*&quot;] noun:[pos=&quot;N[abch]&quot;]</span>
@@ -267,9 +178,9 @@
 <span class="go">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="keyword-in-context">
-<h3>Keyword in Context<a class="headerlink" href="#keyword-in-context" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="keyword-in-context">
+<h3>Keyword in Context<a class="headerlink" href="#keyword-in-context" title="Permalink to this headline"></a></h3>
 <p>To better read the concordance lines, pass <code class="docutils literal notranslate"><span class="pre">concord_list</span></code> into <code class="docutils literal notranslate"><span class="pre">concordancer.kwic_print.KWIC()</span></code> to print them as a keyword-in-context format in the console:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">concordancer.kwic_print</span> <span class="kn">import</span> <span class="n">KWIC</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">KWIC</span><span class="p">(</span><span class="n">concord_list</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
@@ -282,10 +193,10 @@
 <span class="go">正/VH 韓/Nc                 賣/VD 家/Nc      裡面/Ncd 很/Dfa   賣/VD          家/Nc</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="supported-cql-features">
-<h2>Supported CQL features<a class="headerlink" href="#supported-cql-features" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="supported-cql-features">
+<h2>Supported CQL features<a class="headerlink" href="#supported-cql-features" title="Permalink to this headline"></a></h2>
 <p>CQL search is supported through <a class="reference external" href="https://github.com/liao961120/cqls">cqls</a>, which implements a (quite useful) subset of CQL:</p>
 <ul class="simple">
 <li><p>token: <code class="docutils literal notranslate"><span class="pre">[]</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;我&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">[word=&quot;我&quot;]</span></code>, <code class="docutils literal notranslate"><span class="pre">[word!=&quot;我&quot;</span> <span class="pre">&amp;</span> <span class="pre">pos=&quot;N.*&quot;]</span></code></p></li>
@@ -294,7 +205,7 @@
 <li><p>label: <code class="docutils literal notranslate"><span class="pre">lab1:[word=&quot;我&quot;</span> <span class="pre">&amp;</span> <span class="pre">pos=&quot;N.*&quot;]</span> <span class="pre">lab2:(&quot;a&quot;</span> <span class="pre">&quot;b&quot;)</span></code></p></li>
 </ul>
 <div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Function Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Function Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="concordancer.html">Concordancer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="server.html">Searching in Web Browser</a></li>
@@ -303,80 +214,61 @@
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Example Usage</span></p>
+<p class="caption" role="heading"><span class="caption-text">Example Usage</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Finding_Collocations_with_Concordancer.html">1. Finding Collocations with Concordancer</a></li>
 </ul>
 </div>
-</div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="concordancer.html" class="btn btn-neutral float-right" title="Concordancer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, Yongfu Liao.
-
-    </p>
+    <p>&#169; Copyright 2020, Yongfu Liao.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
     <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-1"></script>
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    ga('create', 'UA-XXXXXXX-1', 'auto');
-    
-    ga('send', 'pageview');
-    </script>
-
-    
-   
+      gtag('config', 'UA-XXXXXXX-1', {
+          'anonymize_ip': false,
+      });
+    </script> 
 
 </body>
 </html>
