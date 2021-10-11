@@ -29,7 +29,7 @@ def queryMatchToken(queryTerm: dict, corpToken: dict):
                         negative_matched_tag += 1
                 else:
                     value = append_regex_anchors(value)
-                    if (target_value != None) and re.search(value, target_value):
+                    if (target_value != None) and (not re.search(value, target_value)):
                         negative_matched_tag += 1
         
         if negative_matched_tag != counter:
