@@ -14,3 +14,4 @@ dist.zip
 /docs/build
 *_cache
 /kwic/node_modules
+PYPI_TOKEN.txt

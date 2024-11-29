@@ -131,7 +131,7 @@ class ConcordancerBackend(object):
             cqls.parse(cql)
         except:
             resp.status = falcon.HTTP_400
-            resp.body = 'CQL Syntax error'
+            resp.text = 'CQL Syntax error'
 
         # Query Database
         self.concord_list = list(
@@ -147,7 +147,7 @@ class ConcordancerBackend(object):
         print(f"Found {len(self.concord_list)} results...\n")
         ############ _DEBUGGING ##############
         resp.status = falcon.HTTP_200  # This is the default status
-        resp.body = json.dumps({
+        resp.text = json.dumps({
             'results': self.concord_list,
             'default_attr': self.C._cql_default_attr
         }, ensure_ascii=False)
@@ -166,7 +166,7 @@ class ConcordancerBackend(object):
         -----
         Sends the most recent queried results back to the front-end in JSON
         """
-        resp.body = json.dumps(self.concord_list, ensure_ascii=False, indent="\t")
+        resp.text = json.dumps(self.concord_list, ensure_ascii=False, indent="\t")
 
 
 ########################################
