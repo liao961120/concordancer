@@ -72,7 +72,7 @@ def allValues_match_token(values:list, tag:Union[str, int] , target: dict) -> bo
 
 
 def append_regex_anchors(x: str):
-    x = "(" + x + ")"
+    # x = "(" + x + ")"
     if not x.startswith('^'):
         x = '^' + x
     if not x.endswith('$'):
